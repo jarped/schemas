@@ -2099,15 +2099,6 @@ method on which registration of position is based</documentation>
       <element ref="app:Param_Vegbredder"/>
     </sequence>
   </complexType>
-  <simpleType name="PlanbestemmelseType">
-    <annotation>
-      <documentation>angir om plan har bestemmelser, i så fall om de er egen tekst, og om de er påført plankartet (pbl. 1985 § 20-4 andre ledd bokstav a til h og § 26/pbl. §§ 11-9, 11-10 og 11-11, samt § 12-7)</documentation>
-      <appinfo>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PLANBEST</taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="app:PlanbestemmelseEnumerationType app:PlanbestemmelseOtherType"/>
-  </simpleType>
   <simpleType name="PlanbestemmelseEnumerationType">
     <annotation>
       <documentation>angir om plan har bestemmelser, i så fall om de er egen tekst, og om de er påført plankartet (pbl. 1985 § 20-4 andre ledd bokstav a til h og § 26/pbl. §§ 11-9, 11-10 og 11-11, samt § 12-7)</documentation>
