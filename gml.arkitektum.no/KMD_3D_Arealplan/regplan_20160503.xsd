@@ -5226,7 +5226,7 @@ Merknad: definisjon justert iht. vedtak i SOSI Ag9 20. september 2011 sak 7</doc
           <element name="plantype" type="app:RpPlantypeType"/>
           <element name="planstatus" type="app:PlanstatusType"/>
           <element name="plannavn" type="string"/>
-          <element name="planbestemmelse" type="app:PlanbestemmelseType"/>
+          <element name="planbestemmelse" type="app:PlanbestemmelsePropertyType"/>
           <element minOccurs="0" name="ikrafttredelsesdato" type="date"/>
           <element name="lovreferanse" type="app:LovreferanseTypeType"/>
           <element minOccurs="0" name="lovreferanseBeksrivelse" type="string"/>
