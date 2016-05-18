@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<app:RpJuridiskPunkt xmlns="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Reguleringsplan/20160316" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Reguleringsplan/20160316"  xmlns:gml="http://www.opengis.net/gml/3.2" gml:id="APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Reguleringsplan/20160316 https://raw.githubusercontent.com/jarped/schemas/directionVector/skjema.test.geonorge.no/SOSI/produktspesifikasjon/20160316/reguleringsplan_20160316.xsd">
-<app:arealplanId>
-<app:NasjonalArealplanId>
-<app:kommunenummer>1601</app:kommunenummer>
-<app:planidentifikasjon>r1076</app:planidentifikasjon>
-</app:NasjonalArealplanId>
-</app:arealplanId>
-<app:vertikalnivå>2</app:vertikalnivå>
-<app:identifikasjon>
-<app:Identifikasjon>
-<app:lokalId>0b650e55-d20a-4e54-9fbd-1e96d3a976af</app:lokalId>
-<app:navnerom>www.trondheim.kommune.no/karttildeg/</app:navnerom>
-</app:Identifikasjon>
-</app:identifikasjon>
-<app:førsteDigitaliseringsdato>2002-05-15T00:00:00</app:førsteDigitaliseringsdato>
-<app:oppdateringsdato>2014-01-27T15:29:19.800</app:oppdateringsdato>
-<app:kvalitet>
-<app:Posisjonskvalitet>
-<app:målemetode>55</app:målemetode>
-<app:nøyaktighet>200</app:nøyaktighet>
-</app:Posisjonskvalitet>
-</app:kvalitet>
-<app:objektposisjon>
-<!--
+<app:RpJuridiskPunkt xmlns="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Reguleringsplan/20160316" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Reguleringsplan/20160316" xmlns:gml="http://www.opengis.net/gml/3.2" gml:id="APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://skjema.geonorge.no/SOSI/produktspesifikasjon/Reguleringsplan/20160316 https://raw.githubusercontent.com/jarped/schemas/directionVector/skjema.test.geonorge.no/SOSI/produktspesifikasjon/20160316/reguleringsplan_20160316.xsd">
+	<app:arealplanId>
+		<app:NasjonalArealplanId>
+			<app:kommunenummer>1601</app:kommunenummer>
+			<app:planidentifikasjon>r1076</app:planidentifikasjon>
+		</app:NasjonalArealplanId>
+	</app:arealplanId>
+	<app:vertikalnivå>2</app:vertikalnivå>
+	<app:identifikasjon>
+		<app:Identifikasjon>
+			<app:lokalId>0b650e55-d20a-4e54-9fbd-1e96d3a976af</app:lokalId>
+			<app:navnerom>www.trondheim.kommune.no/karttildeg/</app:navnerom>
+		</app:Identifikasjon>
+	</app:identifikasjon>
+	<app:førsteDigitaliseringsdato>2002-05-15T00:00:00</app:førsteDigitaliseringsdato>
+	<app:oppdateringsdato>2014-01-27T15:29:19.800</app:oppdateringsdato>
+	<app:kvalitet>
+		<app:Posisjonskvalitet>
+			<app:målemetode>55</app:målemetode>
+			<app:nøyaktighet>200</app:nøyaktighet>
+		</app:Posisjonskvalitet>
+	</app:kvalitet>
+	<app:objektposisjon>
+		<!--
 Inlined geometry 'APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af_APP_OBJEKTPOSISJON'
 -->
-<gml:Point gml:id="APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af_APP_OBJEKTPOSISJON" srsName="urn:ogc:def:crs:EPSG::6172">
-<gml:pos>569842.060000000000 7033851.870000000000 -99999</gml:pos>
-</gml:Point>
-</app:objektposisjon>
-<app:symbolplassering>
-<!--
+		<gml:Point gml:id="APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af_APP_OBJEKTPOSISJON" srsName="urn:ogc:def:crs:EPSG::6172">
+			<gml:pos>569842.060000000000 7033851.870000000000 -99999</gml:pos>
+		</gml:Point>
+	</app:objektposisjon>
+	<app:symbolplassering>
+		<!--
 Inlined geometry 'APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af_APP_SYMBOLPLASSERING'
 -->
-<gml:Point gml:id="APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af_APP_SYMBOLPLASSERING" srsName="urn:ogc:def:crs:EPSG::6172">
-<gml:pos>569842.060000000000 7033851.870000000000 -99999</gml:pos>
-</gml:Point>
-</app:symbolplassering>
-<app:juridiskpunkt>1242</app:juridiskpunkt>
+		<gml:Point gml:id="APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af_APP_SYMBOLPLASSERING" srsName="urn:ogc:def:crs:EPSG::6172">
+			<gml:pos>569842.060000000000 7033851.870000000000 -99999</gml:pos>
+		</gml:Point>
+	</app:symbolplassering>
+	<app:juridiskpunkt>1242</app:juridiskpunkt>
 </app:RpJuridiskPunkt>
