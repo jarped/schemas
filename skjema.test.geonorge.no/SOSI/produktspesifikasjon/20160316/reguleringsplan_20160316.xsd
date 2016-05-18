@@ -3905,7 +3905,7 @@ Merknad: definisjon justert iht. vedtak i SOSI Ag9 20. september 2011 sak 7</doc
 							</appinfo>
 						</annotation>
 					</element>
-					<element name="tekstplassering" type="gml:DirectionPropertyType" minOccurs="0">
+					<element name="tekstplassering" type="gml:GeometricPrimitivePropertyType" minOccurs="0">
 						<annotation>
 							<documentation>Brukes for å angi hvor teksten skal skrives.
 Teksten starter i koordinatsett nr 1, og skrives langs linja gitt med koordinatsekvensen.</documentation>
