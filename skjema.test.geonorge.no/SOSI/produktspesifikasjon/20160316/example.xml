@@ -29,9 +29,11 @@ Inlined geometry 'APP_RPPÅSKRIFT_34ecd1b9-c983-4c0e-a682-8b969b296f13_APP_OBJEK
 			<gml:pos>569756.05 7034001.28 -99999</gml:pos>
 		</gml:Point>
 	</objektposisjon>
-	<tekstplassering><gml:DirectionVector>
-		<gml:vector>0.0 1.0</gml:vector>
-	</gml:DirectionVector></tekstplassering>
+	<tekstplassering>
+      <gml:DirectionVector>
+		<gml:horizontalAngle uom="urn:ogc:def:uom:EPSG::9122">0.0</gml:horizontalAngle>
+	  </gml:DirectionVector>
+    </tekstplassering>
 	<generellTekststreng>1</generellTekststreng>
 	<påskriftType>9</påskriftType>
 </RpPåskrift>
