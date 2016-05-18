@@ -3644,7 +3644,7 @@ Merknad: definisjon justert iht. vedtak i SOSI Ag9 20. september 2011 sak 7</doc
 							</appinfo>
 						</annotation>
 					</element>
-					<element name="symbolplassering" type="gml:DirectionPropertyType" minOccurs="0">
+					<element name="symbolplassering" type="gml:DirectionVectorType" minOccurs="0">
 						<annotation>
 							<documentation>Brukes for å angi symbolplassering og eventuell sombolrotasjon. Symbolet plasseres i første koordinatsett, og orienteres/roteres slik at det peker mot andre koordinatsett.</documentation>
 						</annotation>
