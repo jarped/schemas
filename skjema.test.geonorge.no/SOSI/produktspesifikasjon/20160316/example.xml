@@ -29,14 +29,6 @@ Inlined geometry 'APP_RPPÅSKRIFT_34ecd1b9-c983-4c0e-a682-8b969b296f13_APP_OBJEK
 			<gml:pos>569756.05 7034001.28 -99999</gml:pos>
 		</gml:Point>
 	</objektposisjon>
-	<tekstplassering>
-		<!--
-Inlined geometry 'APP_RPPÅSKRIFT_34ecd1b9-c983-4c0e-a682-8b969b296f13_APP_TEKSTPLASSERING'
--->
-		<gml:Point gml:id="APP_RPPÅSKRIFT_34ecd1b9-c983-4c0e-a682-8b969b296f13_APP_TEKSTPLASSERING" srsName="urn:ogc:def:crs:EPSG::6172">
-			<gml:pos>569756.05 7034001.28 -99999</gml:pos>
-		</gml:Point>
-	</tekstplassering>
 	<generellTekststreng>1</generellTekststreng>
 	<påskriftType>9</påskriftType>
 </RpPåskrift>
