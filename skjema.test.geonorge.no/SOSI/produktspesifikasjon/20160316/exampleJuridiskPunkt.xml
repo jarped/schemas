@@ -30,7 +30,7 @@ Inlined geometry 'APP_RPJURIDISKPUNKT_0b650e55-d20a-4e54-9fbd-1e96d3a976af_APP_O
 		</gml:Point>
 	</app:objektposisjon>
 	<app:symbolretning>
-	<!-- Example using east-north for aprox 30 deg *counter-clockwise* rotation -->
+	<!-- Example using east-north for aprox 30 deg *counter-clockwise* rotation originating from east -->
 		<gml:vector srsName="urn:ogc:def:crs:EPSG::25832">0.866 0.5</gml:vector>
 	<!-- 
 To indicate no rotation use the following:
