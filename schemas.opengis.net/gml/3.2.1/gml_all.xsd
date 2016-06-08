@@ -9,10 +9,10 @@
         </documentation>
     </annotation>
     <!-- ====================================================================== -->
+    <!-- 
     <import namespace="http://www.w3.org/1999/xlink" schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
-        <import namespace="http://www.isotc211.org/2005/gmd" schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmd/gmd.xsd"/>
-
-
+    <import namespace="http://www.isotc211.org/2005/gmd" schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmd/gmd.xsd"/>
+     -->
     <element name="Grid" type="gml:GridType" substitutionGroup="gml:AbstractImplicitGeometry">
         <annotation>
             <documentation>The gml:Grid implicitly defines an unrectified grid, which is a network composed of two or more sets of curves in which the members of each set intersect the members of the other sets in an algorithmic way.  The region of interest within the grid is given in terms of its gml:limits, being the grid coordinates of  diagonally opposed corners of a rectangular region.  gml:axisLabels is provided with a list of labels of the axes of the grid (gml:axisName has been deprecated). gml:dimension specifies the dimension of the grid.  
@@ -612,7 +612,9 @@ Since it is based on the XML Schema string type, CoordinatesType may be used in 
         <annotation>
             <documentation>XLink components are the standard method to support hypertext referencing in XML. An XML Schema attribute group, gml:AssociationAttributeGroup, is provided to support the use of Xlinks as the method for indicating the value of a property by reference in a uniform manner in GML.</documentation>
         </annotation>
+        <!-- 
         <attributeGroup ref="xlink:simpleAttrs"/>
+         -->
         <attribute name="nilReason" type="gml:NilReasonType"/>
         <attribute ref="gml:remoteSchema">
             <annotation>
@@ -3360,7 +3362,9 @@ Any needed version information shall be included in the codeSpace attribute of a
         </annotation>
         <complexType>
             <sequence minOccurs="0">
+            <!-- 
                 <element ref="gmd:EX_Extent"/>
+                 -->
             </sequence>
             <attributeGroup ref="gml:AssociationAttributeGroup"/>
         </complexType>
@@ -3954,7 +3958,9 @@ The optional coordinateOperationAccuracy property elements provide estimates of 
         </annotation>
         <complexType>
             <sequence minOccurs="0">
+            <!-- 
                 <element ref="gmd:AbstractDQ_PositionalAccuracy"/>
+                 -->
             </sequence>
             <attributeGroup ref="gml:AssociationAttributeGroup"/>
         </complexType>
@@ -4312,7 +4318,9 @@ The parameter elements are an unordered list of associations to the set of opera
         </annotation>
         <complexType>
             <sequence minOccurs="0">
+            <!-- 
                 <element ref="gmd:CI_Citation"/>
+                 -->
             </sequence>
             <attributeGroup ref="gml:AssociationAttributeGroup"/>
         </complexType>
