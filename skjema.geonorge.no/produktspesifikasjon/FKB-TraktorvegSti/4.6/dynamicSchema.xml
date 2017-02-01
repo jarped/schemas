@@ -1,0 +1,448 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-TraktorvegSti/4.6" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gss="http://www.isotc211.org/2005/gss" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-TraktorvegSti/4.6" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <element name="AbstractFeature" type="gml:AbstractFeatureType" abstract="true" substitutionGroup="gml:AbstractFeature"/>
+  <element name="Fellesegenskaper" type="app:FellesegenskaperType" abstract="true" substitutionGroup="gml:AbstractFeature"/>
+  <complexType name="FellesegenskaperType" abstract="true">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="identifikasjon" type="app:IdentifikasjonPropertyType"/>
+          <element name="kvalitet" type="app:PosisjonskvalitetPropertyType"/>
+          <element name="registreringsversjon" minOccurs="0" type="app:RegistreringsversjonPropertyType"/>
+          <element name="datafangstdato" type="date"/>
+          <element name="verifiseringsdato" minOccurs="0" type="date"/>
+          <element name="oppdateringsdato" minOccurs="0" type="dateTime"/>
+          <element name="informasjon" minOccurs="0" type="string"/>
+          <element name="prosesshistorie" minOccurs="0" type="string"/>
+          <element name="kopidata" minOccurs="0" type="app:KopidataPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="Veglenke" type="app:VeglenkeType" substitutionGroup="app:Fellesegenskaper"/>
+  <complexType name="VeglenkeType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="senterlinje" type="gml:CurvePropertyType"/>
+          <element name="typeVeg" type="app:TypeVegType"/>
+          <element name="kommunenummer" type="gml:CodeType"/>
+          <element name="vegreferanse" minOccurs="0" type="app:VegreferansePropertyType"/>
+          <element name="veglenkeadresse" minOccurs="0" type="app:VeglenkeadressePropertyType"/>
+          <element name="landbruksvegklasse" minOccurs="0" type="app:KlasseLandbruksvegType"/>
+          <element name="konnekteringslenke" minOccurs="0" type="boolean"/>
+          <element name="belysning" minOccurs="0" type="app:BelysningType"/>
+          <element name="barmarksløype" minOccurs="0" type="boolean"/>
+          <element name="rutemerking" minOccurs="0" type="app:RuteMerkingType"/>
+          <element name="medium" minOccurs="0" type="app:MediumType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="Vegsperring" type="app:VegsperringType" substitutionGroup="app:Fellesegenskaper"/>
+  <complexType name="VegsperringType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="posisjon" type="gml:PointPropertyType"/>
+          <element name="vegreferanse" minOccurs="0" type="app:VegreferansePropertyType"/>
+          <element name="vegsperringtype" type="app:VegsperringtypeType"/>
+          <element name="kommunenummer" type="gml:CodeType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="app:PosisjonskvalitetType"/>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="app:IdentifikasjonType"/>
+  <element name="Vegreferanse" substitutionGroup="gml:AbstractObject" type="app:VegreferanseType"/>
+  <element name="Kopidata" substitutionGroup="gml:AbstractObject" type="app:KopidataType"/>
+  <element name="Veglenkeadresse" substitutionGroup="gml:AbstractObject" type="app:VeglenkeadresseType"/>
+  <element name="Registreringsversjon" substitutionGroup="gml:AbstractObject" type="app:RegistreringsversjonType"/>
+  <simpleType name="MediumOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="BelysningType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="VegstatusEnumerationType">
+    <restriction base="string">
+      <enumeration value="V"/>
+      <enumeration value="G"/>
+    </restriction>
+  </simpleType>
+  <complexType name="VegreferansePropertyType">
+    <sequence>
+      <element ref="app:Vegreferanse"/>
+    </sequence>
+  </complexType>
+  <simpleType name="SynbarhetType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="KlasseLandbruksvegOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="RuteMerkingType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="MålemetodeOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="VegsperringtypeType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="MediumEnumerationType">
+    <restriction base="string">
+      <enumeration value="V"/>
+      <enumeration value="B"/>
+      <enumeration value="L"/>
+      <enumeration value="I"/>
+      <enumeration value="S"/>
+      <enumeration value="T"/>
+      <enumeration value="O"/>
+      <enumeration value="D"/>
+      <enumeration value="J"/>
+      <enumeration value="W"/>
+      <enumeration value="U"/>
+      <enumeration value="X"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelysningEnumerationType">
+    <restriction base="string">
+      <enumeration value="1"/>
+      <enumeration value="2"/>
+      <enumeration value="3"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegstatusType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="app:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <complexType name="RegistreringsversjonPropertyType">
+    <sequence>
+      <element ref="app:Registreringsversjon"/>
+    </sequence>
+  </complexType>
+  <simpleType name="VegkategoriOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="MediumType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="SynbarhetOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="RuteMerkingEnumerationType">
+    <restriction base="string">
+      <enumeration value="JA"/>
+      <enumeration value="PM"/>
+      <enumeration value="SM"/>
+      <enumeration value="NEI"/>
+    </restriction>
+  </simpleType>
+  <complexType name="VeglenkeadressePropertyType">
+    <sequence>
+      <element ref="app:Veglenkeadresse"/>
+    </sequence>
+  </complexType>
+  <simpleType name="TypeVegEnumerationType">
+    <restriction base="string">
+      <enumeration value="gangfelt"/>
+      <enumeration value="fortau"/>
+      <enumeration value="traktorveg"/>
+      <enumeration value="sti"/>
+      <enumeration value="trapp"/>
+      <enumeration value="gangveg"/>
+    </restriction>
+  </simpleType>
+  <complexType name="RegistreringsversjonType">
+    <sequence>
+      <element name="produkt" type="string"/>
+      <element name="versjon" type="string"/>
+      <element name="undertype" minOccurs="0" type="string"/>
+    </sequence>
+  </complexType>
+  <simpleType name="KlasseLandbruksvegType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <complexType name="VeglenkePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Veglenke"/>
+    </sequence>
+    <attribute name="type" type="xlink:typeType"/>
+    <attribute name="href" type="xlink:hrefType"/>
+    <attribute name="role" type="xlink:roleType"/>
+    <attribute name="arcrole" type="xlink:arcroleType"/>
+    <attribute name="title" type="xlink:titleAttrType"/>
+    <attribute name="show" type="xlink:showType"/>
+    <attribute name="actuate" type="xlink:actuateType"/>
+    <attribute name="nilReason" type="gml:NilReasonType"/>
+    <attribute name="remoteSchema" type="anyURI"/>
+    <attribute name="owns" type="boolean"/>
+  </complexType>
+  <complexType name="KopidataPropertyType">
+    <sequence>
+      <element ref="app:Kopidata"/>
+    </sequence>
+  </complexType>
+  <simpleType name="MålemetodeHøydeEnumerationType">
+    <restriction base="string">
+      <enumeration value="10"/>
+      <enumeration value="11"/>
+      <enumeration value="12"/>
+      <enumeration value="13"/>
+      <enumeration value="14"/>
+      <enumeration value="15"/>
+      <enumeration value="18"/>
+      <enumeration value="19"/>
+      <enumeration value="20"/>
+      <enumeration value="21"/>
+      <enumeration value="22"/>
+      <enumeration value="23"/>
+      <enumeration value="24"/>
+      <enumeration value="36"/>
+      <enumeration value="60"/>
+      <enumeration value="61"/>
+      <enumeration value="62"/>
+      <enumeration value="63"/>
+      <enumeration value="64"/>
+      <enumeration value="66"/>
+      <enumeration value="67"/>
+      <enumeration value="68"/>
+      <enumeration value="69"/>
+      <enumeration value="70"/>
+      <enumeration value="74"/>
+      <enumeration value="78"/>
+      <enumeration value="79"/>
+      <enumeration value="90"/>
+      <enumeration value="91"/>
+      <enumeration value="92"/>
+      <enumeration value="93"/>
+      <enumeration value="94"/>
+      <enumeration value="95"/>
+      <enumeration value="96"/>
+      <enumeration value="99"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KlasseLandbruksvegEnumerationType">
+    <restriction base="string">
+      <enumeration value="1"/>
+      <enumeration value="2"/>
+      <enumeration value="3"/>
+      <enumeration value="4"/>
+      <enumeration value="5"/>
+      <enumeration value="6"/>
+      <enumeration value="7"/>
+      <enumeration value="8"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriEnumerationType">
+    <restriction base="string">
+      <enumeration value="P"/>
+      <enumeration value="S"/>
+    </restriction>
+  </simpleType>
+  <complexType name="FellesegenskaperPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Fellesegenskaper"/>
+    </sequence>
+    <attribute name="type" type="xlink:typeType"/>
+    <attribute name="href" type="xlink:hrefType"/>
+    <attribute name="role" type="xlink:roleType"/>
+    <attribute name="arcrole" type="xlink:arcroleType"/>
+    <attribute name="title" type="xlink:titleAttrType"/>
+    <attribute name="show" type="xlink:showType"/>
+    <attribute name="actuate" type="xlink:actuateType"/>
+    <attribute name="nilReason" type="gml:NilReasonType"/>
+    <attribute name="remoteSchema" type="anyURI"/>
+    <attribute name="owns" type="boolean"/>
+  </complexType>
+  <simpleType name="SynbarhetEnumerationType">
+    <restriction base="string">
+      <enumeration value="0"/>
+      <enumeration value="1"/>
+      <enumeration value="2"/>
+      <enumeration value="3"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="BelysningOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="VegsperringtypeEnumerationType">
+    <restriction base="string">
+      <enumeration value="betongkjegle"/>
+      <enumeration value="bilsperre"/>
+      <enumeration value="bussluse"/>
+      <enumeration value="låstBom"/>
+      <enumeration value="newJersey"/>
+      <enumeration value="rørgelender"/>
+      <enumeration value="sperrekar"/>
+      <enumeration value="steinblokk"/>
+      <enumeration value="trafikkavviser"/>
+      <enumeration value="ukjent"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="RuteMerkingOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <complexType name="VegsperringPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Vegsperring"/>
+    </sequence>
+    <attribute name="type" type="xlink:typeType"/>
+    <attribute name="href" type="xlink:hrefType"/>
+    <attribute name="role" type="xlink:roleType"/>
+    <attribute name="arcrole" type="xlink:arcroleType"/>
+    <attribute name="title" type="xlink:titleAttrType"/>
+    <attribute name="show" type="xlink:showType"/>
+    <attribute name="actuate" type="xlink:actuateType"/>
+    <attribute name="nilReason" type="gml:NilReasonType"/>
+    <attribute name="remoteSchema" type="anyURI"/>
+    <attribute name="owns" type="boolean"/>
+  </complexType>
+  <simpleType name="VegstatusOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <complexType name="VeglenkeadresseType">
+    <sequence>
+      <element name="kommunenummer" type="gml:CodeType"/>
+      <element name="adressekode" type="integer"/>
+      <element name="adressenavn" minOccurs="0" type="string"/>
+      <element name="sideveg" minOccurs="0" type="boolean"/>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetType">
+    <sequence>
+      <element name="målemetode" type="app:MålemetodeType"/>
+      <element name="nøyaktighet" type="integer"/>
+      <element name="synbarhet" minOccurs="0" type="app:SynbarhetType"/>
+      <element name="målemetodeHøyde" minOccurs="0" type="app:MålemetodeHøydeType"/>
+      <element name="nøyaktighetHøyde" minOccurs="0" type="integer"/>
+    </sequence>
+  </complexType>
+  <simpleType name="MålemetodeEnumerationType">
+    <restriction base="string">
+      <enumeration value="10"/>
+      <enumeration value="11"/>
+      <enumeration value="12"/>
+      <enumeration value="13"/>
+      <enumeration value="14"/>
+      <enumeration value="15"/>
+      <enumeration value="18"/>
+      <enumeration value="19"/>
+      <enumeration value="20"/>
+      <enumeration value="21"/>
+      <enumeration value="22"/>
+      <enumeration value="23"/>
+      <enumeration value="24"/>
+      <enumeration value="30"/>
+      <enumeration value="31"/>
+      <enumeration value="32"/>
+      <enumeration value="33"/>
+      <enumeration value="34"/>
+      <enumeration value="35"/>
+      <enumeration value="36"/>
+      <enumeration value="37"/>
+      <enumeration value="38"/>
+      <enumeration value="40"/>
+      <enumeration value="41"/>
+      <enumeration value="42"/>
+      <enumeration value="43"/>
+      <enumeration value="44"/>
+      <enumeration value="45"/>
+      <enumeration value="46"/>
+      <enumeration value="47"/>
+      <enumeration value="48"/>
+      <enumeration value="49"/>
+      <enumeration value="50"/>
+      <enumeration value="51"/>
+      <enumeration value="52"/>
+      <enumeration value="53"/>
+      <enumeration value="54"/>
+      <enumeration value="55"/>
+      <enumeration value="56"/>
+      <enumeration value="60"/>
+      <enumeration value="61"/>
+      <enumeration value="62"/>
+      <enumeration value="63"/>
+      <enumeration value="64"/>
+      <enumeration value="65"/>
+      <enumeration value="66"/>
+      <enumeration value="67"/>
+      <enumeration value="68"/>
+      <enumeration value="69"/>
+      <enumeration value="70"/>
+      <enumeration value="71"/>
+      <enumeration value="72"/>
+      <enumeration value="73"/>
+      <enumeration value="74"/>
+      <enumeration value="77"/>
+      <enumeration value="78"/>
+      <enumeration value="79"/>
+      <enumeration value="80"/>
+      <enumeration value="81"/>
+      <enumeration value="82"/>
+      <enumeration value="90"/>
+      <enumeration value="91"/>
+      <enumeration value="92"/>
+      <enumeration value="93"/>
+      <enumeration value="94"/>
+      <enumeration value="95"/>
+      <enumeration value="96"/>
+      <enumeration value="97"/>
+      <enumeration value="99"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegsperringtypeOtherType">
+    <restriction base="string"/>
+  </simpleType>
+  <complexType name="VegreferanseType">
+    <sequence>
+      <element name="vegkategori" type="app:VegkategoriType"/>
+      <element name="vegstatus" type="app:VegstatusType"/>
+      <element name="vegnummer" type="integer"/>
+      <element name="hovedparsell" type="integer"/>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetPropertyType">
+    <sequence>
+      <element ref="app:Posisjonskvalitet"/>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string"/>
+      <element name="navnerom" type="string"/>
+      <element name="versjonId" minOccurs="0" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="KopidataType">
+    <sequence>
+      <element name="områdeId" type="integer"/>
+      <element name="originalDatavert" type="string"/>
+      <element name="kopidato" type="date"/>
+    </sequence>
+  </complexType>
+  <simpleType name="VegkategoriType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+  <simpleType name="MålemetodeType">
+    <restriction base="anySimpleType"/>
+  </simpleType>
+</schema>

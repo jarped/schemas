@@ -1,0 +1,1578 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-TraktorvegSti/4.6" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-TraktorvegSti/4.6" version="4.6">
+  <annotation>
+    <documentation>FKB-TraktovegSti er et landsdekkende FKB-datasett som inneholder traktorveger, gangveger og stier med senterlinjegeometri. En viktig del av dette er å legge til rette for å håndtere geometridelen av forvaltningsopplegget for landbruksveger. Denne spesifikasjonen definerer også registrering av senterlinje for gangfelt, fortau og trapp som opsjoner.
+
+FKB-TraktorvegSti må sees i sammenheng med FKB-Vegnett som inneholder vegnettet i NVDB. Sammen med vegnettet fra NVDB skal FKB-TraktorvegSti kunne danne et komplett samferdselsnettverk for kjørende, syklende og gående. Datagrunnlaget i FKB-TraktorvegSti vil ha svært varierende grad av nettverkstopologi. Man må regne med å gjøre en jobb med sammenknytning av vegnettet og FKB-TraktorvegSti før dette kan betraktes som ett nettverk og benyttes i nettverksanalyser.
+
+FKB-TraktorvegSti 4.6 baserer seg på generelle konsepter definert i SOSI del 1 versjon 4.5 og SOSI del 2 Vegnett 4.6, Vegsituasjon 4.5 og Friluftsliv 4.1, samt NVDB datakatalogen.</documentation>
+  </annotation>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BelysningType">
+    <annotation>
+      <documentation>om det er permanent belysning langs sti eller løype. Data som tidligere var registrert som objekttype Lysløype skal i FKB-TraktorvegSti angis som veglenker med belysning.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BELYSNING</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:BelysningEnumerationType app:BelysningOtherType"/>
+  </simpleType>
+  <simpleType name="BelysningEnumerationType">
+    <annotation>
+      <documentation>om det er permanent belysning langs sti eller løype. Data som tidligere var registrert som objekttype Lysløype skal i FKB-TraktorvegSti angis som veglenker med belysning.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BELYSNING</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>belysning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>delvis belysning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>ikke belysning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelysningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="app:FellesegenskaperType">
+    <annotation>
+      <documentation>abstrakt objekt som bærer en felles egenskaper som brukes på kurve- og punktobjekter i FKB.</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="FellesegenskaperType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="identifikasjon" type="app:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>Unik identifikasjon av objektet</documentation>
+            </annotation>
+          </element>
+          <element name="kvalitet" type="app:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="registreringsversjon" type="app:RegistreringsversjonPropertyType">
+            <annotation>
+              <documentation>angivelse av hvilken produktspesifikasjon som er utgangspunkt  for dataene</documentation>
+            </annotation>
+          </element>
+          <element name="datafangstdato" type="date">
+            <annotation>
+              <documentation>dato når objektet siste gang ble registrert/observert/målt i terrenget</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">DATAFANGSTDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="verifiseringsdato" type="date">
+            <annotation>
+              <documentation>dato når dataene er fastslått å være i samsvar med virkeligheten</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERIFISERINGSDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+            <annotation>
+              <documentation>dato for siste endring på objektetdataene</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">OPPDATERINGSDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="informasjon" type="string">
+            <annotation>
+              <documentation>generell opplysning</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">INFORMASJON</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosesshistorie" type="string">
+            <annotation>
+              <documentation>beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PROSESS_HISTORIE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kopidata" type="app:KopidataPropertyType">
+            <annotation>
+              <documentation>angivelse av at objektet er hentet fra et kopidatasett og ikke fra originaldatasettet</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FellesegenskaperPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Fellesegenskaper"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="app:IdentifikasjonType">
+    <annotation>
+      <documentation>Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">IDENT</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string">
+        <annotation>
+          <documentation>Unik identifikator innenfor navnerommet. For FKB benyttes UUID.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LOKALID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="navnerom" type="string">
+        <annotation>
+          <documentation>navnerom i form av en URI</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NAVNEROM</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="versjonId" type="string">
+        <annotation>
+          <documentation>identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. Benyttes normalt ikke i FKB.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERSJONID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="app:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <simpleType name="KlasseLandbruksvegType">
+    <annotation>
+      <documentation>kodeliste for klasser av landbruksveger. &lt;a href="$inet://http://www.skogkurs.no/vegnormaler/"&gt;&lt;font color="#0000ff"&gt;&lt;u&gt;http://www.skogkurs.no/vegnormaler/&lt;/u&gt;&lt;/font&gt;&lt;/a&gt;
+Benyttes bare for landbruksveger (typeveg Traktorveg og ev. landbruksveger som er nedklassifisert til typeveg Sti).</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NVDB_KLASSELANDBRUKSVEG</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:KlasseLandbruksvegEnumerationType app:KlasseLandbruksvegOtherType"/>
+  </simpleType>
+  <simpleType name="KlasseLandbruksvegEnumerationType">
+    <annotation>
+      <documentation>kodeliste for klasser av landbruksveger. &lt;a href="$inet://http://www.skogkurs.no/vegnormaler/"&gt;&lt;font color="#0000ff"&gt;&lt;u&gt;http://www.skogkurs.no/vegnormaler/&lt;/u&gt;&lt;/font&gt;&lt;/a&gt;
+Benyttes bare for landbruksveger (typeveg Traktorveg og ev. landbruksveger som er nedklassifisert til typeveg Sti).</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NVDB_KLASSELANDBRUKSVEG</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>Helårs bilvei som bygges i samarbeid med det offentlige slik at den senere kan inngå i det offentlige veinett. Krav til geometrisk utforming m.m. skal være i samsvar med de spesifikasjoner Statens vegvesen har fastsatt for den avtalte veiklasse.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>Helårs bilvei med høy standard som skal kunne trafikkeres med lass hele året. Denne veiklassen skal brukes på grendeveier med blandet trafikkgrunnlag og på skogsbilveier, gardsveier og seterveier med stor trafikkbelastning av tunge kjøretøyer.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>Skogsbilveier, gards- og seterveier med moderat til lavt trafikkgrunnlag. Veien skal kunne trafikkeres med lass hele året med begrensninger i teleløsningsperioden og i perioder med spesielt mye nedbør.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="4">
+        <annotation>
+          <documentation>Bilveier som bygges for transport av tømmer og andre landbruksprodukter i barmarksperioden&lt;i&gt;. &lt;/i&gt;Veiklassen bør bare bygges i områder der tømmerkvantum og transportavstand tilsier biltransport, men der terrengforhold og tilgjengelige ressurser ikke gir økonomisk grunnlag for å bygge en helårsvei.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="5">
+        <annotation>
+          <documentation>Bilveier beregnet for tømmertransport med bil uten henger utelukkende i barmarksperioden&lt;i&gt;. &lt;/i&gt;Veiklassen må bare bygges på steder der det ikke er teknisk mulig eller økonomisk forsvarlig å bygge en høyere veistandard. Denne veiklassen skal bare benyttes i unntakstilfeller.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6">
+        <annotation>
+          <documentation>Bilveier for tømmertransport på vinterføre, der veiens bæreevne baseres på tele og snø. Veiklassen egner seg i strøk med stabile vinterforhold og lange transportavstander. Veiklassen bør bare brukes der det ikke er økonomisk grunnlag for å bygge helårsvei, og der den videre skogbehandling ikke krever bedre veistandard.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="7">
+        <annotation>
+          <documentation>Veier for transport med lastetraktor og landbrukstraktor med henger. Generelt skal disse veiene kunne nyttes til transport hele året unntatt i teleløsningen. Svake partier i undergrunnen må forsterkes med bærelag.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8">
+        <annotation>
+          <documentation>Veier for transport av tømmer og landbruksprodukter med landbrukstraktor eller annet lettere transportutstyr. Veiklassen omfatter også enkle traktorveier som inngår i det permanente landbruksveinettet og som medfører varige terrenginngrep. Standarden må i stor grad tilpasses det formål og transportutstyr veien bygges for.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KlasseLandbruksvegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Kopidata" substitutionGroup="gml:AbstractObject" type="app:KopidataType">
+    <annotation>
+      <documentation>angivelse av at objektet er hentet fra en kopi av originaldata</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOPIDATA</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="KopidataType">
+    <sequence>
+      <element name="områdeId" type="integer">
+        <annotation>
+          <documentation>identifikasjon av område som dataene dekker
+
+Merknad: Kan angis med kommunenummer eller fylkesnummer. Disse bør spesifiseres nærmere.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">OMRÅDEID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="originalDatavert" type="string">
+        <annotation>
+          <documentation>ansvarlig etat for forvaltning av data</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ORIGINALDATAVERT</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="kopidato" type="date">
+        <annotation>
+          <documentation>dato når objektet ble kopiert fra originaldatasettet
+
+Merknad:
+Er en del av egenskapen Kopidata. Brukes i de tilfeller hvor en kopidatabase brukes til distribusjon.
+Å kopiere et datasett til en kopidatabase skal ikke føre til at Oppdateringsdato blir endret.
+Eventuell redigering av data i et kopidatasett medfører ny Oppdateringsdato, Datafangstdato og/eller Verifiseringsdato.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOPIDATO</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="KopidataPropertyType">
+    <sequence>
+      <element ref="app:Kopidata"/>
+    </sequence>
+  </complexType>
+  <simpleType name="MediumType">
+    <annotation>
+      <documentation>objektets beliggenhet i forhold til jordoverflaten
+
+Eksempel:
+Veg på bro, i tunnel, inne i et bygningsmessig anlegg, etc.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MediumEnumerationType app:MediumOtherType"/>
+  </simpleType>
+  <simpleType name="MediumEnumerationType">
+    <annotation>
+      <documentation>objektets beliggenhet i forhold til jordoverflaten
+
+Eksempel:
+Veg på bro, i tunnel, inne i et bygningsmessig anlegg, etc.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="V">
+        <annotation>
+          <documentation>Alltid i vann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B">
+        <annotation>
+          <documentation>I bygning/bygningsmessig anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L">
+        <annotation>
+          <documentation>I luft</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="I">
+        <annotation>
+          <documentation>På isbre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>På sjøbunnen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T">
+        <annotation>
+          <documentation>På terrenget/på bakkenivå (default-verdi)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="O">
+        <annotation>
+          <documentation>På vannoverflaten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="D">
+        <annotation>
+          <documentation>Tidvis under vann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="J">
+        <annotation>
+          <documentation>Under isbre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="W">
+        <annotation>
+          <documentation>Under sjøbunnen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="U">
+        <annotation>
+          <documentation>Under terrenget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="X">
+        <annotation>
+          <documentation>ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MediumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeType">
+    <annotation>
+      <documentation>metode som ligger til grunn for registrering av posisjon</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MålemetodeEnumerationType app:MålemetodeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeEnumerationType">
+    <annotation>
+      <documentation>metode som ligger til grunn for registrering av posisjon</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Målt i terrenget , uspesifisert metode/måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="11">
+        <annotation>
+          <documentation>Målt i terrenget med totalstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>Målt i terrenget med teodolitt og elektronisk avstandsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="13">
+        <annotation>
+          <documentation>Målt i terrenget med teodolitt og målebånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14">
+        <annotation>
+          <documentation>Målt i terrenget, ortogonalmetoden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15">
+        <annotation>
+          <documentation>Punkt beregnet på bakgrunn av måling mot andre punkter, slik som to avstander eller avstand og retning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="18">
+        <annotation>
+          <documentation>Tatt fra plan eller godkjent tiltak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>Annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>Målt i stereoinstrument, uspesifisert instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="21">
+        <annotation>
+          <documentation>Punkt beregnet ved aerotriangulering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>Målt i stereoinstrument, analytisk plotter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="23">
+        <annotation>
+          <documentation>Målt i stereoinstrument, autograf, analogt instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>Målt i stereoinstrument, digitalt instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="30">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner, uspesifisert kartmedium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="31">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er blyantoriginal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="32">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er rissefolie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="33">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av  god kvalitet.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="34">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av mindre god kvalitet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="35">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er papirkopi.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>Målt med laserskanner fra fly</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="37">
+        <annotation>
+          <documentation>Målt med laserskanner plassert i kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="38">
+        <annotation>
+          <documentation>brukes for objekter som er stedfestet med lineær referanse, enten disse leveres med stedfesting kun som lineære referanser, eller med koordinatgeometri avledet fra lineære referanser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="40">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto eller flybilde ved hjelp av manuell registrering på et digitaliseringsbord, uspesifisert bildemedium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="41">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="42">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="43">
+        <annotation>
+          <documentation>Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="44">
+        <annotation>
+          <documentation>Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="45">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på skjerm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="46">
+        <annotation>
+          <documentation>Geometri overført fra satellittbilde ved hjelp av manuell registrering på skjerm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="47">
+        <annotation>
+          <documentation>Digitalisert på skjerm fra andre digitale rasterdata</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="48">
+        <annotation>
+          <documentation>Digitalisert på skjerm fra tolkning av seismikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="49">
+        <annotation>
+          <documentation>Vektorisering fra laserdata, brukes også der vektoriseringen støttes av ortofoto</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="50">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord, medium uspesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="51">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er blyantoriginal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="52">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er rissefolie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="53">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av god kvalitet, samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="54">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av mindre god kvalitet, samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="55">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er papirkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="56">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på skjerm, medium skannet kart (raster), samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode. Ikke nærmere spesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="61">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode, fra terrengmodell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="62">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode, vektet middel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>Genererte data: Sirkelgeometri, korridor eller annen geometri generert ut fra f.eks et punkt eller en linje (f.eks midtlinje veg)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="64">
+        <annotation>
+          <documentation>Genererte data: Generalisering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="65">
+        <annotation>
+          <documentation>Genererte data: Sentralpunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="66">
+        <annotation>
+          <documentation>Genererte data: Sammenknytningspunkt (f.eks mellom ulike kartlegginger), randpunkt (f.eks mellom ulike kilder til kart)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="67">
+        <annotation>
+          <documentation>Koordinater hentet fra GAB, forløperen til registerdelen av matrikkelen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="68">
+        <annotation>
+          <documentation>Koordinater hentet fra JREG, jordregisteret</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="69">
+        <annotation>
+          <documentation>Beregnet, uspesifisert hvordan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>Spesielle metoder, uspesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="71">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stikkstang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="72">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med waterstang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="73">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med målehjul</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="74">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stigningsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="77">
+        <annotation>
+          <documentation>Punkt fastsatt ut fra et grunnlag (kart, bilde), f.eks ved partenes enighet ved en oppmålingsforretning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="78">
+        <annotation>
+          <documentation>Geometri fastsatt ved dom, lov, traktat eller kongelig resolusjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="79">
+        <annotation>
+          <documentation>Annet (spesifiseres i filhode)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="80">
+        <annotation>
+          <documentation>Digitalisert ut fra frihåndstegning.  Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="81">
+        <annotation>
+          <documentation>Digitalisert fra krokering på kart, dvs grovt skissert på kart</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="82">
+        <annotation>
+          <documentation>Digitalisert ut fra frihåndstegning (direkte på skjerm). Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>Treghetsstedfesting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="91">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, relative målinger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="92">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, enkle målinger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="93">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling statisk måling.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="94">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling andre metoder.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="95">
+        <annotation>
+          <documentation>Kombinasjon av GPS/Treghet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO).: Fasemåling RTK (realtids kinematisk måling)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="97">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO). Fasemåling float-løsning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="99">
+        <annotation>
+          <documentation>Målemetode er ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MålemetodeHøydeEnumerationType app:MålemetodeHøydeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeEnumerationType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Terrengmålt: Uspesifisert måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="11">
+        <annotation>
+          <documentation>Terrengmålt: Totalstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>Terrengmålt: Teodolitt og el avstandsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="13">
+        <annotation>
+          <documentation>Terrengmålt: Teodolitt og målebånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14">
+        <annotation>
+          <documentation>Terrengmålt: Ortogonalmetoden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15">
+        <annotation>
+          <documentation>Nivellement</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="18">
+        <annotation>
+          <documentation>Tatt fra plan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>Annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>Stereoinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="21">
+        <annotation>
+          <documentation>Aerotriangulert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>Stereoinstrument: Analytisk plotter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="23">
+        <annotation>
+          <documentation>Stereoinstrument: Autograf</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>Stereoinstrument: Digitalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>Flybåren laserscanning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>Genererte data (interpolasjon)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="61">
+        <annotation>
+          <documentation>Genererte data (interpolasjon): Terrengmodell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="62">
+        <annotation>
+          <documentation>Genererte data (interpolasjon): Vektet middel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>Genererte data: Fra annen geometri</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="64">
+        <annotation>
+          <documentation>Genererte data: Generalisering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="66">
+        <annotation>
+          <documentation>Genererte data: Sammenknytningspunkt, randpunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="67">
+        <annotation>
+          <documentation>Koordinater hentet fra GAB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="68">
+        <annotation>
+          <documentation>Koordinater hentet fra JREG</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="69">
+        <annotation>
+          <documentation>Beregnet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>Spesielle metoder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="74">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stigningsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="78">
+        <annotation>
+          <documentation>Fastsatt ved dom eller kongelig resolusjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="79">
+        <annotation>
+          <documentation>Annet (spesifiseres i filhode)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>Treghetsstedfesting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="91">
+        <annotation>
+          <documentation>GNSS: Kodemåling, relative målinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="92">
+        <annotation>
+          <documentation>GNSS: Kodemåling, enkle målinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="93">
+        <annotation>
+          <documentation>GNSS: Fasemåling, statisk måling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="94">
+        <annotation>
+          <documentation>GNSS: Fasemåling, andre metoder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="95">
+        <annotation>
+          <documentation>Kombinasjon av GNSS/Treghet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>GNSS: Fasemåling RTK</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="99">
+        <annotation>
+          <documentation>Ukjent målemetode</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="app:PosisjonskvalitetType">
+    <annotation>
+      <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KVALITET</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="PosisjonskvalitetType">
+    <sequence>
+      <element name="målemetode" type="app:MålemetodeType">
+        <annotation>
+          <documentation>metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss</documentation>
+        </annotation>
+      </element>
+      <element name="nøyaktighet" type="integer">
+        <annotation>
+          <documentation>punktstandardavviket i grunnriss for punkter samt tverravvik for linjer oppgitt i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="synbarhet" type="app:SynbarhetType">
+        <annotation>
+          <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="målemetodeHøyde" type="app:MålemetodeHøydeType">
+        <annotation>
+          <documentation>metode for å måle høyden</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighetHøyde" type="integer">
+        <annotation>
+          <documentation>nøyaktighet for høyden i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetPropertyType">
+    <sequence>
+      <element ref="app:Posisjonskvalitet"/>
+    </sequence>
+  </complexType>
+  <element name="Registreringsversjon" substitutionGroup="gml:AbstractObject" type="app:RegistreringsversjonType">
+    <annotation>
+      <documentation>angir hvilken versjon av registreringsinstruksen som ble benyttet ved datafangst
+
+Eksempel:
+I et datasett kan det finnes objekter som er etablert fra ulike registreringsversjoner. For eksempel har registreringsinstruksen for objekttypen Takkant i FKB blitt endret fra SOSI/FKB-versjon 3.4 til versjon 4.0. Dersom en kommune ønsker å ajourføre Takkant for et delområde av kommunen etter FKB/SOSI-versjon 4.0, vil han etter ajourføring ha et kommunedekkende datasett der Takkant er registrert med forskjellig registreringsinstruks. I disse tilfellene kan det være nyttig å kunne skille på objektnivå hvilken registreringsversjon som er benyttet ved datafangst. Egenskapen kan benyttes til dette.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">REGISTRERINGSVERSJON</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="RegistreringsversjonType">
+    <sequence>
+      <element name="produkt" type="string">
+        <annotation>
+          <documentation>entydig navn på produktet i form av et kortnavn</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PRODUKT</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="versjon" type="string">
+        <annotation>
+          <documentation>versjonsnummer</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERSJON</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="undertype" type="string">
+        <annotation>
+          <documentation>brukes for å skille mellom undertyper av en versjon, dvs. endringer i registeringsinstruks for et objekt</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">UNDERVERSJON</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="RegistreringsversjonPropertyType">
+    <sequence>
+      <element ref="app:Registreringsversjon"/>
+    </sequence>
+  </complexType>
+  <simpleType name="RuteMerkingType">
+    <annotation>
+      <documentation>forteller om det er merking  langs en sti, løype, veg, sykkelvei mv. Det bør være samsvar mellom veglenker angitt som merket i FKB-TraktorvegSti og rutene som inngår iNasjonal database for tur- og friluftsruter</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">RUTEMERKING</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:RuteMerkingEnumerationType app:RuteMerkingOtherType"/>
+  </simpleType>
+  <simpleType name="RuteMerkingEnumerationType">
+    <annotation>
+      <documentation>forteller om det er merking  langs en sti, løype, veg, sykkelvei mv. Det bør være samsvar mellom veglenker angitt som merket i FKB-TraktorvegSti og rutene som inngår iNasjonal database for tur- og friluftsruter</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">RUTEMERKING</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="JA">
+        <annotation>
+          <documentation>Merket, uspesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="PM">
+        <annotation>
+          <documentation>merket rute/løype
+
+Merknad:
+Det er ikke spesifisert om merkingen er permanent eller bare i visse årstider</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SM">
+        <annotation>
+          <documentation>Sesongmerket/kvistet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="NEI">
+        <annotation>
+          <documentation>Ikke merket</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RuteMerkingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:SynbarhetEnumerationType app:SynbarhetOtherType"/>
+  </simpleType>
+  <simpleType name="SynbarhetEnumerationType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>Fullt ut synlig/gjenfinnbar i terrenget (default-verdi)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>Forøvrig grei å innmåle. (Benyttes bl.a. for innmåling av ledninger på lukket grøft)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>Middels synlig i flybilde/modell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>Dårlig/ikke synlig i flybilde/modell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegType">
+    <annotation>
+      <documentation>Type veg</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">TYPEVEG</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:TypeVegEnumerationType app:TypeVegOtherType"/>
+  </simpleType>
+  <simpleType name="TypeVegEnumerationType">
+    <annotation>
+      <documentation>Type veg</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">TYPEVEG</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="gangfelt">
+        <annotation>
+          <documentation>kryssingssted for gående hvor trafikkreglenes bestemmelser om gangfelt gjelder. Oppmerket og eventuelt skiltet med skilt 516 (INSPIRE: FormOfWay=Walkway)
+
+Denne typevegen er opsjonell å registrere/forvalte i FKB. Typeveg Gangfelt henger naturlig sammen med Typeveg Fortau. Dersom Fortau registreres bør også Gangfelt registreres. I FKB-Veg registreres GangfeltAvgrensning for avgrensning av de veglenkene som klassifiseres som Typeveg Gangfelt.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fortau">
+        <annotation>
+          <documentation>del av veg reservert for gående. Ligger høyere enn kjørebanen og er adskilt fra denne med kantstein (INSPIRE: FormOfWay=Walkway)
+
+Denne typevegen er opsjonell å registrere/forvalte i FKB. Typeveg Fortau henger naturlig sammen med Typeveg Gangfelt. Dersom Gangfelt registreres bør også Fortau registreres.
+
+I FKB-Veg registreres Fortauskant og ev. FortauskantYtre for  avgrensning av de veglenkene som klassifiseres som Typeveg Fortau.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="traktorveg">
+        <annotation>
+          <documentation>veg som hele året (eller deler av året) ikke egner seg for vanlig bilkjøring, men som er farbar med traktor (INSPIRE: FormOfWay=Tractor)
+
+Traktorveger skal være så brede at traktorer kan benytte disse, minimum 2.5 meter. Traktorveger inngår i det permanente vegnettet og medfører varige terrenginngrep i form av en sammenhengende vegkropp.
+
+Slep og driftsveier som ikke har bearbeidet såle, men som er skapt av gjentatte passeringer med traktor, defineres ikke som en traktorveg.
+Veger som er bygd som traktorveger, men opprustet slik at de i praksis er kjørbare med bil skal registreres som bilveg.
+En (tidligere) traktorveg som er gjengrodd med vegetasjon og ikke lenger egner seg for ferdsel med traktor skal ikke klassifiseres som traktorveg (men kan kanskje klassifiseres som Typeveg Sti).
+
+I FKB-Veg registreres Traktorveg med flategeometri for de veglenkene som klassifiseres som Typeveg Traktorveg.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sti">
+        <annotation>
+          <documentation>tydelig tråkk i terrenget som er markert gjennom års bruk eller tilrettelagt for ferdsel til fots.
+
+Sti benyttes primært i utmark, men kan også registreres i urbane strøk for stier/tråkk i terrenget der det ikke er noen opparbeidet veg med klar avgrensning. I områder med mange stier (for eksempel rundt parkeringsplasser, parkområder etc.) skal bare hovedferdselårene registreres. For stier i utmark kan Typeveg Sti benyttes gjennomgående selv om stien i områder er opparbeidet som en gangveg (som for eksempel på høgt trafikkerte turiststier).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trapp">
+        <annotation>
+          <documentation>trapp som naturlig inngår i nettverket. Denne typevegen er opsjonell å registrere/forvalte i FKB.
+
+I FKB-BygnAnlegg registreres FrittståendeTrapp med flategeometri for de veglenkene som klassifiseres som Typeveg Trapp.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gangveg">
+        <annotation>
+          <documentation>veg som er bestemt for gående. Vegen er skilt fra annen veg med gressplen, grøft, gjerde, kanststein eller på annen måte. (INSPIRE: Walkway)
+
+Gangveger benyttes typisk i parkområder, på gravplasser og til gangareal (tilknytningsveger for gående) i forbindelse med blokkbebyggelse og offentlige bygg. Gangveger i forbindelse med eneboliger registreres ikke. Gangveger har (til forskjell fra Sti) en tydelig og jevn avgrensning fra omliggende terreng. Gangveg benyttes også for veger med fast dekke i utmarksområder som ikke er åpen for motorisert ferdsel, f.eks. rulleskiløyper.
+
+Gangveg er normalt fremkommelige for kjøretøy, men er ikke åpen for annet enn kjøring for teknisk vedlikehold og nødhjelpskjøring.
+
+I områder med mange gangveger (typisk i parkområder) skal bare hovedferdselårene registreres. I FKB-Veg registreres Gangvegkant for avgrensning av de veglenkene som klassifiseres som Typeveg Gangveg.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriType">
+    <annotation>
+      <documentation>Angir vegkategori</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NVDB_VEGKATEGORI</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:VegkategoriEnumerationType app:VegkategoriOtherType"/>
+  </simpleType>
+  <simpleType name="VegkategoriEnumerationType">
+    <annotation>
+      <documentation>Angir vegkategori</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NVDB_VEGKATEGORI</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="P">
+        <annotation>
+          <documentation>Privat veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>Skogsveg - tidligere Skogsbilveg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Veglenke" substitutionGroup="app:Fellesegenskaper" type="app:VeglenkeType">
+    <annotation>
+      <documentation>Veglenke er en felles objekttype for alle veglenker (senterlinjer) i et vegnett. Egenskapen typeveg beskriver hva slags veglenke det er. I FKB-TraktorvegSti er aktuelle verdier for typeveg Traktorveg, Gangveg og Sti. Gangfelt, Fortau og Trapp er også definert, men er opsjonelle å registrere/forvalte.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VeglenkeType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del</documentation>
+            </annotation>
+          </element>
+          <element name="typeVeg" type="app:TypeVegType">
+            <annotation>
+              <documentation>Typeveg er den sentrale egenskapen for å vise hvilken hva slags ferdsel som kan skje på veglenka.
+
+Tidligere objekttype Traktorveg registreres som Typeveg Traktorveg
+Tidligere objkettype Sti registreres som Typeveg Sti
+Typeveg Gangveg benyttes for veglenker der Gangvegkant benyttes for avgrensning (jf. FKB-Veg 4.5)
+
+Typeveg Fortau, Gangfelt og Trapp er opsjonelle typeveg-koder. Det er beskrevet hvordan disse skal registreres &lt;u&gt;dersom&lt;/u&gt; man ønsker å etablere et nettverk for gående. Det finnes (pr. januar 2014) ikke data for disse typeveg-kodene.</documentation>
+            </annotation>
+          </element>
+          <element name="kommunenummer" type="gml:CodeType">
+            <annotation>
+              <documentation>nummerering av kommuner i henhold til SSB sin offisielle liste</documentation>
+              <appinfo>
+                <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-TraktorvegSti/4.6/Kommunenummer.xml</defaultCodeSpace>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegreferanse" type="app:VegreferansePropertyType">
+            <annotation>
+              <documentation>sammensatt identifikator for vegreferanse. Benyttes for å referere til skogveger i landbrukforvaltningas vegregister.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="veglenkeadresse" type="app:VeglenkeadressePropertyType">
+            <annotation>
+              <documentation>adressen til veglenken</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="landbruksvegklasse" type="app:KlasseLandbruksvegType">
+            <annotation>
+              <documentation>angir hvilken landbruksvegklasse veglenka klassifiseres som (jf. Normaler for landbruksveier, http://www.skogkurs.no/vegnormaler/)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="konnekteringslenke" type="boolean">
+            <annotation>
+              <documentation>angir at en lenke kun eksisterer for å knytte sammen andre lenker. Et kunstig objekt hvor senterlinjen representerer en konstruert linje som skjøter sammen lenker der det er hull i geometrien. Benyttes for å knytte sammen veglenkene over åpne plasser, f.eks. ulike typer tun og parkeringsplasser. Dersom egenskapen ikke er angitt har dette samme betydning som å angi verdien Nei.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KONNEKTERINGSLENKE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="belysning" type="app:BelysningType">
+            <annotation>
+              <documentation>Angir om veglenka er belyst. Dersom veglenka er belyst skal egenskapen angis med riktig kodeverdi. Bruk av kodeverdien "Ikke belyst" har samme betydning som ikke å angi egenskapen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="barmarksløype" type="boolean">
+            <annotation>
+              <documentation>Betinget egenskap som kun brukes for veglenker som er omfattet av barmarksløyper i Finnmark (jf. definison styrt av fylkesmannen i Finnmark). Dersom egenskapen ikke er angitt betyr dette det samme som barmarksløype Nei.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BARMARKSLØYPE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rutemerking" type="app:RuteMerkingType">
+            <annotation>
+              <documentation>Opsjonell egenskap som angir om veglenka er merket i en rute.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VeglenkePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Veglenke"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Veglenkeadresse" substitutionGroup="gml:AbstractObject" type="app:VeglenkeadresseType">
+    <annotation>
+      <documentation>veglenkeadresse gir adressen til veglenken. Denne er "fellesdelen" av adressen til alle som er tilknyttet veglenken. Det vil normalt ikke registreres veglenkeadresse på veglenker i FKB-TraktorvegSti. I spesielle tilfeller (f.eks. hytteområder der tilgang til adresserte bygninger skjer fra traktorveger/stier) er det imidlertid lov å registrere.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGLENKEADRESSE</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="VeglenkeadresseType">
+    <sequence>
+      <element name="kommunenummer" type="gml:CodeType">
+        <annotation>
+          <documentation>identifisering av hvilken kommune veglenken ligger i.
+Merknad: Må være med for å få unik identifisering, i og med at adressekoden kun er unik innen en kommune.</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-TraktorvegSti/4.6/Kommunenummer.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="adressekode" type="integer">
+        <annotation>
+          <documentation>entydig nummerering av veglenker innen en kommune.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ADRESSEKODE</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="adressenavn" type="string">
+        <annotation>
+          <documentation>offisielt navn på lenken</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ADRESSENAVN</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="sideveg" type="boolean">
+        <annotation>
+          <documentation>angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra.
+Dersom ikke oppgitt, gir det "Nei"-alternativet, dvs "Ikke sideveg"</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SIDEVEG</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="VeglenkeadressePropertyType">
+    <sequence>
+      <element ref="app:Veglenkeadresse"/>
+    </sequence>
+  </complexType>
+  <element name="Vegreferanse" substitutionGroup="gml:AbstractObject" type="app:VegreferanseType">
+    <annotation>
+      <documentation>sammensatt identifikator for vegreferanse</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VREF</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="VegreferanseType">
+    <sequence>
+      <element name="vegkategori" type="app:VegkategoriType">
+        <annotation>
+          <documentation>angir hvilken type veg veglenk beskriver</documentation>
+        </annotation>
+      </element>
+      <element name="vegstatus" type="app:VegstatusType">
+        <annotation>
+          <documentation>angir veglenka sin status</documentation>
+        </annotation>
+      </element>
+      <element name="vegnummer" type="integer">
+        <annotation>
+          <documentation>angir nummeret til en vegrute.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGNUMMER</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="hovedparsell" type="integer">
+        <annotation>
+          <documentation>oppdeling av vegruter i kortere parseller med relativt enhetlig standard og funksjon. Dersom vegen består av bare en parsell benyttes verdien 1.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HOVEDPARSELL</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="VegreferansePropertyType">
+    <sequence>
+      <element ref="app:Vegreferanse"/>
+    </sequence>
+  </complexType>
+  <element name="Vegsperring" substitutionGroup="app:Fellesegenskaper" type="app:VegsperringType">
+    <annotation>
+      <documentation>fysisk sperring av vegen.  Vegsperringer kan knyttes til veglenker med typeveg Traktorveg og Gangveg. Dersom vegsperringa knyttes til en traktorveg som har vegident (kobling til landbruksvegregisteret) skal vegsperringa også kodes med tilhørende vegident. Objekttypen må registreres og vedlikeholdes administrativt.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegsperringType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegreferanse" type="app:VegreferansePropertyType">
+            <annotation>
+              <documentation>sammensatt identifikator for en vegrute. Brukes for å angi hvilken veg punktobjektet tilhører.</documentation>
+            </annotation>
+          </element>
+          <element name="vegsperringtype" type="app:VegsperringtypeType">
+            <annotation>
+              <documentation>angir type vegsperring</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSPERRINGTYPE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="kommunenummer" type="gml:CodeType">
+            <annotation>
+              <documentation>nummerering av kommuner i henhold til SSB sin offisielle liste</documentation>
+              <appinfo>
+                <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-TraktorvegSti/4.6/Kommunenummer.xml</defaultCodeSpace>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegsperringPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Vegsperring"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VegsperringtypeType">
+    <annotation>
+      <documentation>angir type vegsperring</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSPERRINGTYPE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:VegsperringtypeEnumerationType app:VegsperringtypeOtherType"/>
+  </simpleType>
+  <simpleType name="VegsperringtypeEnumerationType">
+    <annotation>
+      <documentation>angir type vegsperring</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSPERRINGTYPE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betongkjegle">
+        <annotation>
+          <documentation>Betongkjegle</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bilsperre">
+        <annotation>
+          <documentation>Bilsperre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bussluse">
+        <annotation>
+          <documentation>Bussluse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="låstBom">
+        <annotation>
+          <documentation>Låst bom</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="newJersey">
+        <annotation>
+          <documentation>New Jersey</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rørgelender">
+        <annotation>
+          <documentation>Rørgelender</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sperrekar">
+        <annotation>
+          <documentation>Sperrekar</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="steinblokk">
+        <annotation>
+          <documentation>Steinblokk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkavviser">
+        <annotation>
+          <documentation>Trafikkavviser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegsperringtypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegstatusType">
+    <annotation>
+      <documentation>Angir vegstatus</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NVDB_VEGSTATUS</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:VegstatusEnumerationType app:VegstatusOtherType"/>
+  </simpleType>
+  <simpleType name="VegstatusEnumerationType">
+    <annotation>
+      <documentation>Angir vegstatus</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NVDB_VEGSTATUS</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="V">
+        <annotation>
+          <documentation>Eksisterende veg: Veg som er del av operativt vegnett (tatt opp til vedlikehold).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="G">
+        <annotation>
+          <documentation>Gang-/sykkelveg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegstatusOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>
