@@ -63,7 +63,7 @@
     <restriction base="string"/>
   </simpleType>
   <simpleType name="BelysningType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:BelysningEnumerationType app:BelysningOtherType"/>
   </simpleType>
   <simpleType name="VegstatusEnumerationType">
     <restriction base="string">
@@ -77,19 +77,19 @@
     </sequence>
   </complexType>
   <simpleType name="SynbarhetType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:SynbarhetEnumerationType app:SynbarhetOtherType"/>
   </simpleType>
   <simpleType name="KlasseLandbruksvegOtherType">
     <restriction base="string"/>
   </simpleType>
   <simpleType name="RuteMerkingType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:RuteMerkingEnumerationType app:RuteMerkingOtherType"/>
   </simpleType>
   <simpleType name="MålemetodeOtherType">
     <restriction base="string"/>
   </simpleType>
   <simpleType name="VegsperringtypeType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:VegsperringtypeEnumerationType app:VegsperringtypeOtherType"/>
   </simpleType>
   <simpleType name="MediumEnumerationType">
     <restriction base="string">
@@ -115,7 +115,7 @@
     </restriction>
   </simpleType>
   <simpleType name="VegstatusType">
-    <restriction base="anySimpleType"/>
+<union memberTypes="app:VegstatusEnumerationType app:VegstatusOtherType"/>
   </simpleType>
   <complexType name="IdentifikasjonPropertyType">
     <sequence>
@@ -131,7 +131,7 @@
     <restriction base="string"/>
   </simpleType>
   <simpleType name="MediumType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:MediumEnumerationType app:MediumOtherType"/>
   </simpleType>
   <simpleType name="SynbarhetOtherType">
     <restriction base="string"/>
@@ -167,26 +167,18 @@
     </sequence>
   </complexType>
   <simpleType name="KlasseLandbruksvegType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:KlasseLandbruksvegEnumerationType app:KlasseLandbruksvegOtherType"/>
   </simpleType>
   <simpleType name="MålemetodeHøydeOtherType">
     <restriction base="string"/>
   </simpleType>
-  <complexType name="VeglenkePropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Veglenke"/>
-    </sequence>
-    <attribute name="type" type="xlink:typeType"/>
-    <attribute name="href" type="xlink:hrefType"/>
-    <attribute name="role" type="xlink:roleType"/>
-    <attribute name="arcrole" type="xlink:arcroleType"/>
-    <attribute name="title" type="xlink:titleAttrType"/>
-    <attribute name="show" type="xlink:showType"/>
-    <attribute name="actuate" type="xlink:actuateType"/>
-    <attribute name="nilReason" type="gml:NilReasonType"/>
-    <attribute name="remoteSchema" type="anyURI"/>
-    <attribute name="owns" type="boolean"/>
-  </complexType>
+	<complexType name="VeglenkePropertyType">
+		<sequence minOccurs="0">
+			<element ref="app:Veglenke"/>
+		</sequence>
+		<attributeGroup ref="gml:AssociationAttributeGroup"/>
+		<attributeGroup ref="gml:OwnershipAttributeGroup"/>
+	</complexType>
   <complexType name="KopidataPropertyType">
     <sequence>
       <element ref="app:Kopidata"/>
@@ -253,16 +245,8 @@
     <sequence minOccurs="0">
       <element ref="app:Fellesegenskaper"/>
     </sequence>
-    <attribute name="type" type="xlink:typeType"/>
-    <attribute name="href" type="xlink:hrefType"/>
-    <attribute name="role" type="xlink:roleType"/>
-    <attribute name="arcrole" type="xlink:arcroleType"/>
-    <attribute name="title" type="xlink:titleAttrType"/>
-    <attribute name="show" type="xlink:showType"/>
-    <attribute name="actuate" type="xlink:actuateType"/>
-    <attribute name="nilReason" type="gml:NilReasonType"/>
-    <attribute name="remoteSchema" type="anyURI"/>
-    <attribute name="owns" type="boolean"/>
+		<attributeGroup ref="gml:AssociationAttributeGroup"/>
+		<attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
   <simpleType name="SynbarhetEnumerationType">
     <restriction base="string">
@@ -273,7 +257,7 @@
     </restriction>
   </simpleType>
   <simpleType name="TypeVegType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:TypeVegEnumerationType app:TypeVegOtherType"/>
   </simpleType>
   <simpleType name="BelysningOtherType">
     <restriction base="string"/>
@@ -299,23 +283,15 @@
     <restriction base="string"/>
   </simpleType>
   <simpleType name="MålemetodeHøydeType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:MålemetodeHøydeEnumerationType app:MålemetodeHøydeOtherType"/>
   </simpleType>
-  <complexType name="VegsperringPropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Vegsperring"/>
-    </sequence>
-    <attribute name="type" type="xlink:typeType"/>
-    <attribute name="href" type="xlink:hrefType"/>
-    <attribute name="role" type="xlink:roleType"/>
-    <attribute name="arcrole" type="xlink:arcroleType"/>
-    <attribute name="title" type="xlink:titleAttrType"/>
-    <attribute name="show" type="xlink:showType"/>
-    <attribute name="actuate" type="xlink:actuateType"/>
-    <attribute name="nilReason" type="gml:NilReasonType"/>
-    <attribute name="remoteSchema" type="anyURI"/>
-    <attribute name="owns" type="boolean"/>
-  </complexType>
+	<complexType name="VegsperringPropertyType">
+		<sequence minOccurs="0">
+			<element ref="app:Vegsperring"/>
+		</sequence>
+		<attributeGroup ref="gml:AssociationAttributeGroup"/>
+		<attributeGroup ref="gml:OwnershipAttributeGroup"/>
+	</complexType>
   <simpleType name="VegstatusOtherType">
     <restriction base="string"/>
   </simpleType>
@@ -439,10 +415,10 @@
       <element name="kopidato" type="date"/>
     </sequence>
   </complexType>
-  <simpleType name="VegkategoriType">
-    <restriction base="anySimpleType"/>
+   <simpleType name="VegkategoriType">
+    <union memberTypes="app:VegkategoriEnumerationType app:VegkategoriOtherType"/>
   </simpleType>
   <simpleType name="MålemetodeType">
-    <restriction base="anySimpleType"/>
+    <union memberTypes="app:MålemetodeEnumerationType app:MålemetodeOtherType"/>
   </simpleType>
 </schema>
