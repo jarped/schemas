@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Bygning/4.6" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Bygning/4.6" version="4.6">
+﻿<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Bygning/4.61" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Bygning/4.61" version="4.61">
   <annotation>
     <documentation>Spesifikasjonen beskriver av alle typer bygninger, takoverbygg, beskrivende bygningslinjer (for eksempel mønelinje) samt bygningsvedheng (for eksempel veranda). Bygninger er koblet mot matrikkelsystemet med bygningsnummeret og spesifikasjonen skal inneholde alle bygninger som finnes i terrenget og/eller er registrert ferdig bygget i Matrikkelen. Bygninger som er under oppføring kan finnes i FKB-Tiltak.
 
 Spesifikasjonen er basert på en bygningsmodell i 2.5D, dvs. at det ikke er registreres/forvaltes 3D-objekterer, men kartdata der høyden på toppen av objektet er registrert og 3D-objekter kan genereres ved å prosjisere objektene ned på en terrengmodell.
 
-FKB-Bygning versjon 4.6 baserer seg på generelle konsepter definert i SOSI del 1 versjon 4.5 og SOSI del 2 Bygg versjon 4.5.</documentation>
+Den eneste endringen fra FKB-Bygning 4.6 til FKB-Bygning 4.61 er innføring av bygningsstatus FS - FritattFraSøknadsplikt for bygningspunkter fra matrikkelen.
+
+FKB-Bygning versjon 4.61 baserer seg på generelle konsepter definert i SOSI del 1 versjon 4.5 og SOSI del 2 Bygg versjon 4.5.</documentation>
   </annotation>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
@@ -424,6 +426,11 @@ For bygg som er behandlet etter søknad  i samsvar med Plan- og BygningsLoven §
       <enumeration value="BF">
         <annotation>
           <documentation>Kode for at bygningen er flyttet.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FS">
+        <annotation>
+          <documentation>Brukes for bygninger under 50m2 som er fritatt for søknadsplikt</documentation>
         </annotation>
       </enumeration>
     </restriction>
@@ -1565,9 +1572,9 @@ Kan være aktuelt i forbindelse med ulike typer objekter med utstrekning i høyd
   </simpleType>
   <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="app:IdentifikasjonType">
     <annotation>
-      <documentation>Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet.
+      <documentation>Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet. 
 
-NOTE1 Denne eksterne objektidentifikasjonen må ikke forveksles med en tematisk objektidentifikasjon, slik som f.eks bygningsnummer.
+NOTE1 Denne eksterne objektidentifikasjonen må ikke forveksles med en tematisk objektidentifikasjon, slik som f.eks bygningsnummer. 
 
 NOTE 2 Denne unike identifikatoren vil ikke endres i løpet av kartobjektets levetid.</documentation>
       <appinfo>
@@ -1610,7 +1617,7 @@ NOTE 2 Denne unike identifikatoren vil ikke endres i løpet av kartobjektets lev
   </complexType>
   <simpleType name="InnmålingsstatusType">
     <annotation>
-      <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet.
+      <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet. 
 
 Egenskapen aggregeres fra omrisset etter følgende regler:
 Dersom alle avgrensingslinjene har en fotogrammetrisk kvalitet (målemetode 20-24), har egenskapen registreringsversjon og alle punkter i linjene har høyde brukes verdien "Konstruert".
@@ -1624,7 +1631,7 @@ For øvrige data (alle objekter i omrisset har en kvalitetskode som tilsier at d
   </simpleType>
   <simpleType name="InnmålingsstatusEnumerationType">
     <annotation>
-      <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet.
+      <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet. 
 
 Egenskapen aggregeres fra omrisset etter følgende regler:
 Dersom alle avgrensingslinjene har en fotogrammetrisk kvalitet (målemetode 20-24), har egenskapen registreringsversjon og alle punkter i linjene har høyde brukes verdien "Konstruert".
@@ -1691,7 +1698,7 @@ For øvrige data (alle objekter i omrisset har en kvalitetskode som tilsier at d
     <annotation>
       <documentation>angivelse av at objektet er hentet fra en kopi av originaldata
 
-Merknad:
+Merknad: 
 Kan benyttes dersom man gjør et uttak av en database som ikke inneholder originaldataene.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOPIDATA</taggedValue>
@@ -1720,7 +1727,7 @@ Merknad: Kan angis med kommunenummer eller fylkesnummer. Disse bør spesifiseres
       </element>
       <element name="kopidato" type="date">
         <annotation>
-          <documentation>dato når objektet ble kopiert fra originaldatasettet
+          <documentation>dato når objektet ble kopiert fra originaldatasettet  
 
 Merknad:
 Er en del av egenskapen Kopidata. Brukes i de tilfeller hvor en kopidatabase brukes til distribusjon.
@@ -2668,9 +2675,6 @@ NB. Denne burde vært samordnet med Objektkatalog/Kortnavn som brukes i SOSI-hod
       <element name="kommune" type="gml:CodeType">
         <annotation>
           <documentation>nummerering av kommuner i henhold til Statistisk sentralbyrå sin offisielle liste</documentation>
-          <appinfo>
-             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMM</taggedValue>
-          </appinfo>
         </annotation>
       </element>
       <element name="registreringskretsnummer" type="integer">
@@ -2773,7 +2777,7 @@ Merknad: Eksempel på kanter der TakMur skal benyttes er gavlvegger og brannvegg
   <element name="Takkant" substitutionGroup="app:Takriss" type="app:TakkantType">
     <annotation>
       <documentation>bygningens ytre takflateavgrensing
-Merknad: Høydereferansen er de målte punktene på taket.
+Merknad: Høydereferansen er de målte punktene på taket. 
 Merknad: Dersom deler av takkanten ikke er synlig kodes den synlige delen som takkant- og den ikke synlige som fiktiv bygningsavgrensning.</documentation>
     </annotation>
   </element>
@@ -2983,7 +2987,7 @@ Merknad: ikke ytterkant som registreres som takkant</documentation>
   </complexType>
   <element name="TaksprangBunn" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:TaksprangBunnType">
     <annotation>
-      <documentation>bunn av takkant inne på en bygningskropp
+      <documentation>bunn av takkant inne på en bygningskropp 
 Merknad: Ikke ytterkant som er takkant</documentation>
     </annotation>
   </element>

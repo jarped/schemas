@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Arealbruk/4.6" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Arealbruk/4.6" version="4.6">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Arealbruk/4.61" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Arealbruk/4.61" version="4.61">
   <annotation>
     <documentation>Spesifikasjonen beskriver arealbruk uavhengig av markens produksjonsevne. Arealbruk beskriver den fysiske bruk av et geografisk område. Eksempler på dette er parkering på et jorde som vil kodes som en parkeringsplass, uavhengig av om dette arealstykke egner seg som fulldyrka. Arealbruken må holdes atskilt fra markslagsbeskrivelsene som beskriver jordas bærevne (arealtilstand, bonitet, markslag og mineralske råstoffer). En del objekter befinner seg derimot i et grenseland, og det kan være vanskelig å avgjøre i hvilke kapittel de ulike objektene hører hjemme. 
 
@@ -244,36 +244,6 @@ Merknad: Inneholder informasjon om når kopidatasettet ble kopiert fra originald
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <element name="Fyllplass" substitutionGroup="app:Fellesegenskaper" type="app:FyllplassType">
-    <annotation>
-      <documentation>plass for deponering av masse</documentation>
-    </annotation>
-  </element>
-  <complexType name="FyllplassType">
-    <complexContent>
-      <extension base="app:FellesegenskaperType">
-        <sequence>
-          <element name="område" type="gml:SurfacePropertyType">
-            <annotation>
-              <documentation>objektets utstrekning</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>sted som objektet eksisterer på</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="FyllplassPropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Fyllplass"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
   <element name="Golfbane" substitutionGroup="app:Fellesegenskaper" type="app:GolfbaneType">
     <annotation>
       <documentation>område for golfspilling</documentation>
@@ -363,36 +333,6 @@ Merknad: Inneholder informasjon om når kopidatasettet ble kopiert fra originald
   <complexType name="GrustakPropertyType">
     <sequence minOccurs="0">
       <element ref="app:Grustak"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <element name="Gruve" substitutionGroup="app:Fellesegenskaper" type="app:GruveType">
-    <annotation>
-      <documentation>ikke dagbrudd og skjerp, hvor gruveinngangen er tydelig</documentation>
-    </annotation>
-  </element>
-  <complexType name="GruveType">
-    <complexContent>
-      <extension base="app:FellesegenskaperType">
-        <sequence>
-          <element name="område" type="gml:SurfacePropertyType">
-            <annotation>
-              <documentation>objektets utstrekning</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>sted som objektet eksisterer på</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="GruvePropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Gruve"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
@@ -600,36 +540,6 @@ Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.</docume
   <complexType name="KvalitetPåkrevdPropertyType">
     <sequence minOccurs="0">
       <element ref="app:KvalitetPåkrevd"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <element name="Leirtak" substitutionGroup="app:Fellesegenskaper" type="app:LeirtakType">
-    <annotation>
-      <documentation>område for leirtak</documentation>
-    </annotation>
-  </element>
-  <complexType name="LeirtakType">
-    <complexContent>
-      <extension base="app:FellesegenskaperType">
-        <sequence>
-          <element name="område" type="gml:SurfacePropertyType">
-            <annotation>
-              <documentation>objektets utstrekning</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>sted som objektet eksisterer på</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="LeirtakPropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Leirtak"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
@@ -1423,36 +1333,6 @@ I et datasett kan det finnes objekter som er etablert fra ulike registreringsver
   <complexType name="SportIdrettPlassPropertyType">
     <sequence minOccurs="0">
       <element ref="app:SportIdrettPlass"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <element name="Steinbrudd" substitutionGroup="app:Fellesegenskaper" type="app:SteinbruddType">
-    <annotation>
-      <documentation>område for steinbrudd</documentation>
-    </annotation>
-  </element>
-  <complexType name="SteinbruddType">
-    <complexContent>
-      <extension base="app:FellesegenskaperType">
-        <sequence>
-          <element name="område" type="gml:SurfacePropertyType">
-            <annotation>
-              <documentation>objektets utstrekning</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>sted som objektet eksisterer på</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="SteinbruddPropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Steinbrudd"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>

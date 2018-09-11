@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-BygnAnlegg/4.6" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-BygnAnlegg/4.6" version="4.6">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-BygnAnlegg/4.61" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-BygnAnlegg/4.61" version="4.61">
   <annotation>
     <documentation>Spesifikasjonen beskriver bygningsmessige anlegg som ikke er spesifisert i andre fagspesifikke FKB-datasett.
 
@@ -2817,81 +2817,6 @@ I et datasett kan det finnes objekter som er etablert fra ulike registreringsver
   <complexType name="SandkassePropertyType">
     <sequence minOccurs="0">
       <element ref="app:Sandkasse"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <element name="Silo" substitutionGroup="app:KvalitetOpsjonell" type="app:SiloType">
-    <annotation>
-      <documentation>lagringsbygg for fôr og korn som ikke er registrert som bygning i Matrikkelen
-Merknad: Store silobygg vil normalt være registrert som bygning.</documentation>
-    </annotation>
-  </element>
-  <complexType name="SiloType">
-    <complexContent>
-      <extension base="app:KvalitetOpsjonellType">
-        <sequence>
-          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
-            <annotation>
-              <documentation>objektets utstrekning</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>sted som objektet eksisterer på</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NØ</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="SiloPropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Silo"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <element name="Silokant" substitutionGroup="app:KvalitetPåkrevd" type="app:SilokantType">
-    <annotation>
-      <documentation>avgrensning av silo</documentation>
-    </annotation>
-  </element>
-  <complexType name="SilokantType">
-    <complexContent>
-      <extension base="app:KvalitetPåkrevdType">
-        <sequence>
-          <element name="grense" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>forløp som følger objektets sentrale del</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="høydereferanse" type="app:HøydereferanseType">
-            <annotation>
-              <documentation>angivelse av om registreringen er utført på topp eller bunn av et element- f.eks. en skråning- mur osv.</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="medium" type="app:MediumType">
-            <annotation>
-              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="SilokantPropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:Silokant"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>

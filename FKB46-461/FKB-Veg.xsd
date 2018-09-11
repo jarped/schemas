@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Veg/4.6" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Veg/4.6" version="4.6">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Veg/4.61" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Veg/4.61" version="4.61">
   <annotation>
     <documentation>Spesifikasjonen gjelder for de enkelte vegelementene som beskriver veglegemets geometri. I tillegg inngår tilhørende vegsituasjonsobjekter og flategeometri for traktorveger i datasettet.
 
@@ -209,36 +209,6 @@ FKB-Veg versjon 4.6 baserer seg på generelle konsepter definert i SOSI del 1 ve
   <complexType name="FortauskantPropertyType">
     <sequence minOccurs="0">
       <element ref="app:Fortauskant"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <element name="FortauskantYtre" substitutionGroup="app:KvalitetPåkrevd" type="app:FortauskantYtreType">
-    <annotation>
-      <documentation>avgrensning av fortau ut mot terreng/bebyggelse i en gate (ikke langs kjørebanen)</documentation>
-    </annotation>
-  </element>
-  <complexType name="FortauskantYtreType">
-    <complexContent>
-      <extension base="app:KvalitetPåkrevdType">
-        <sequence>
-          <element name="grense" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>forløp som følger overgang mellom ulike fenomener</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="medium" type="app:MediumType">
-            <annotation>
-              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="FortauskantYtrePropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:FortauskantYtre"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
@@ -1292,36 +1262,6 @@ Veg på bro, i tunnel, inne i et bygningsmessig anlegg, etc.</documentation>
   <complexType name="ParkeringsområdePropertyType">
     <sequence minOccurs="0">
       <element ref="app:Parkeringsområde"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <element name="ParkeringsområdeAvgrensning" substitutionGroup="app:KvalitetPåkrevd" type="app:ParkeringsområdeAvgrensningType">
-    <annotation>
-      <documentation>avgrensning av område for parkering av kjøretøy</documentation>
-    </annotation>
-  </element>
-  <complexType name="ParkeringsområdeAvgrensningType">
-    <complexContent>
-      <extension base="app:KvalitetPåkrevdType">
-        <sequence>
-          <element name="grense" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>forløp som følger overgang mellom ulike fenomener</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="medium" type="app:MediumType">
-            <annotation>
-              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="ParkeringsområdeAvgrensningPropertyType">
-    <sequence minOccurs="0">
-      <element ref="app:ParkeringsområdeAvgrensning"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
