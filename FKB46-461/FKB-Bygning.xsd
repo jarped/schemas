@@ -1,0 +1,3121 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Bygning/4.6" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Bygning/4.6" version="4.6">
+  <annotation>
+    <documentation>Spesifikasjonen beskriver av alle typer bygninger, takoverbygg, beskrivende bygningslinjer (for eksempel mønelinje) samt bygningsvedheng (for eksempel veranda). Bygninger er koblet mot matrikkelsystemet med bygningsnummeret og spesifikasjonen skal inneholde alle bygninger som finnes i terrenget og/eller er registrert ferdig bygget i Matrikkelen. Bygninger som er under oppføring kan finnes i FKB-Tiltak.
+
+Spesifikasjonen er basert på en bygningsmodell i 2.5D, dvs. at det ikke er registreres/forvaltes 3D-objekterer, men kartdata der høyden på toppen av objektet er registrert og 3D-objekter kan genereres ved å prosjisere objektene ned på en terrengmodell.
+
+FKB-Bygning versjon 4.6 baserer seg på generelle konsepter definert i SOSI del 1 versjon 4.5 og SOSI del 2 Bygg versjon 4.5.</documentation>
+  </annotation>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="AnnenBygning" substitutionGroup="app:DatafangstdatoOpsjonell" type="app:AnnenBygningType">
+    <annotation>
+      <documentation>bygning som ikke er registrert  i matrikkelen</documentation>
+    </annotation>
+  </element>
+  <complexType name="AnnenBygningType">
+    <complexContent>
+      <extension base="app:DatafangstdatoOpsjonellType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bygningstype" type="app:BygningstypeKodeType">
+            <annotation>
+              <documentation>beskrivelse av hva bygningen faktisk er brukt til, eventuelt hva bygningen er godkjent til.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BYGGTYP_NBR</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="innmålingsstatus" type="app:InnmålingsstatusType">
+            <annotation>
+              <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="AnnenBygningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:AnnenBygning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Arkade" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:ArkadeType">
+    <annotation>
+      <documentation>avgrensing av en tunnel gjennom en bygning</documentation>
+    </annotation>
+  </element>
+  <complexType name="ArkadeType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="høydereferanse" type="app:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ArkadePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Arkade"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="BeskrivendeBygningsdetalj" substitutionGroup="app:KvalitetPåkrevd" type="app:BeskrivendeBygningsdetaljType">
+    <annotation>
+      <documentation>bygningsdetalj som ligger innenfor bygningsavgrensning, og som ikke er knyttet til bygningens avgrensning</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="BeskrivendeBygningsdetaljType">
+    <complexContent>
+      <extension base="app:KvalitetPåkrevdType">
+        <sequence>
+          <element name="treDNivå" type="app:TreDNivåType">
+            <annotation>
+              <documentation>hvilken 3D framstillingsmulighet (angitt i 6 nivåer) bygningen kan framstilles i.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">TRE_D_NIVÅ</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BeskrivendeBygningsdetaljPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:BeskrivendeBygningsdetalj"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Bygning" substitutionGroup="app:DatafangstdatoOpsjonell" type="app:BygningType">
+    <annotation>
+      <documentation>bygning som er registrert i matrikkelen</documentation>
+    </annotation>
+  </element>
+  <complexType name="BygningType">
+    <complexContent>
+      <extension base="app:DatafangstdatoOpsjonellType">
+        <sequence>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+          <element name="bygningsnummer" type="integer">
+            <annotation>
+              <documentation>nummerering av bygninger fra Matrikkelen. Nummeret er unikt og landsdekkende.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BYGGNR</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="bygningstype" type="app:BygningstypeKodeType">
+            <annotation>
+              <documentation>beskrivelse av hva bygningen faktisk er brukt til, eventuelt hva bygningen er godkjent til.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BYGGTYP_NBR</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="bygningsstatus" type="app:BygningsstatusKodeType">
+            <annotation>
+              <documentation>informasjon om bygningens status</documentation>
+            </annotation>
+          </element>
+          <element name="kommunenummer" type="gml:CodeType">
+            <annotation>
+              <documentation>nummerering av kommuner i henhold til Statistisk sentralbyrå sin offisielle liste</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="innmålingsstatus" type="app:InnmålingsstatusType">
+            <annotation>
+              <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="sefrakident" type="app:SefrakIdentPropertyType">
+            <annotation>
+              <documentation>sefrakminnets objektnummer, bestående av henvisning til (evt utgått) kommune, registreringskretsnummer og husløpenummer</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BygningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Bygning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="BygningBru" substitutionGroup="app:Bygningsvedheng" type="app:BygningBruType">
+    <annotation>
+      <documentation>bru tilknyttet bygning som brukes som adkomst til bygninger, og bruer mellom bygninger
+Merknad:  Brukes på bygninger som ikke er driftsbygninger i landbruket. I det siste tilfellet brukes låvebru</documentation>
+    </annotation>
+  </element>
+  <complexType name="BygningBruType">
+    <complexContent>
+      <extension base="app:BygningsvedhengType">
+        <sequence/>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BygningBruPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:BygningBru"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="Bygningsavgrensning" substitutionGroup="app:KvalitetPåkrevd" type="app:BygningsavgrensningType">
+    <annotation>
+      <documentation>abstrakt supertype som bærer geometrien til avgrensningslinjene. Vil aldri realiseres som en objekttype</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="BygningsavgrensningType">
+    <complexContent>
+      <extension base="app:KvalitetPåkrevdType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BygningsavgrensningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Bygningsavgrensning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="BygningsavgrensningTiltak" substitutionGroup="app:KvalitetOpsjonell" type="app:BygningsavgrensningTiltakType">
+    <annotation>
+      <documentation>Bygningsavgrensning hentet fra FKB-Tiltak. Dataene er tatt fra plan og er ikke innmålt i terrenget.</documentation>
+    </annotation>
+  </element>
+  <complexType name="BygningsavgrensningTiltakType">
+    <complexContent>
+      <extension base="app:KvalitetOpsjonellType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>et punkts vertikale avstand over en fysisk eller matematisk definert referanseflate [H]</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydereferanse" type="app:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeoverbakken" type="double">
+            <annotation>
+              <documentation>objekts høyde over bakken</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BygningsavgrensningTiltakPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:BygningsavgrensningTiltak"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Bygningsdelelinje" substitutionGroup="app:KvalitetPåkrevd" type="app:BygningsdelelinjeType">
+    <annotation>
+      <documentation>linje mellom to bygninger (bygninger registrert i Matrikkelen) som står inntil hverandre
+Merknad: Det kan ofte være vanskelig å registrere bygningsdelelinjer nøyaktig. Usikkerhet i fastleggelsen av bygningsdelelinjen skal synliggjøres gjennom kvalitetskoding (f.eks posisjonskvalitet 81 50).</documentation>
+    </annotation>
+  </element>
+  <complexType name="BygningsdelelinjeType">
+    <complexContent>
+      <extension base="app:KvalitetPåkrevdType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="treDNivå" type="app:TreDNivåType">
+            <annotation>
+              <documentation>hvilken 3D framstillingsmulighet (angitt i 6 nivåer) bygningen kan framstilles i.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BygningsdelelinjePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Bygningsdelelinje"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Bygningslinje" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:BygningslinjeType">
+    <annotation>
+      <documentation>linje som beskriver bygningsdetalj innenfor en takflate  og som ikke kan beskrives av andre objekttyper
+Eksempel: Valming på tak</documentation>
+    </annotation>
+  </element>
+  <complexType name="BygningslinjeType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BygningslinjePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Bygningslinje"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="BygningsstatusKodeType">
+    <annotation>
+      <documentation>Lovlige statuser for bygningstiltak.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BYGGSTAT</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:BygningsstatusKodeEnumerationType app:BygningsstatusKodeOtherType"/>
+  </simpleType>
+  <simpleType name="BygningsstatusKodeEnumerationType">
+    <annotation>
+      <documentation>Lovlige statuser for bygningstiltak.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BYGGSTAT</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="RA">
+        <annotation>
+          <documentation>angir at det er gitt rammetillatelse.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="IG">
+        <annotation>
+          <documentation>Angir at det er gitt igangsettingstillatelse.
+
+For bygg som er behandlet etter søknad i samsvar med Plan- og BygningsLoven § 93, vil som hovedregel dato for gitt igangsettingstillatelse kunne benyttes. For andre bygg gjelder som hovedregel at byggearbeidet ansees igangsatt når pelingsarbeider, forskaling av grunnmur eller støping av såle er påbegynt.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="MB">
+        <annotation>
+          <documentation>Kode for at det er gitt midlertidig brukstillatelse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FA">
+        <annotation>
+          <documentation>Kode for at det er utferdiget ferdigattest.
+For bygg som er behandlet etter søknad  i samsvar med Plan- og BygningsLoven §93, kan som hovedregel benyttes dato for ferdigattest (evt. midlertidig brukstillatelse) som kommunen utsteder. Forøvrig regnes at et bygg er tatt i bruk når minst halve bygget er ferdig/tatt i bruk.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="TB">
+        <annotation>
+          <documentation>Dette gjelder bygninger som er konvertert fra GAB.  Etter gammel bygningslov var dette det begrepet som ble brukt.  Etter ny PBL er statusen enten midlertidig brukstillatelse eller ferdigattest, men i GAB skilles det ikke på dette.  Derfor konverteres alt til tatt i bruk.  Koden bruker også for etterregistrering av gamle bygg, og bygninger som oppdages i marka uten at de har vært gjennom en byggesaksbehandling.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="MT">
+        <annotation>
+          <documentation>Kode for at det er registrert tiltak for meldingssak.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="MF">
+        <annotation>
+          <documentation>Kode for at det er fullført tiltak for meldingssak.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="GR">
+        <annotation>
+          <documentation>Kode for at bygningen er godkjent revet eller brent.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="IP">
+        <annotation>
+          <documentation>kode for bygninger som ikke er pliktig registrert i henhold til Plan- og bygningsloven.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BR">
+        <annotation>
+          <documentation>Kode for at bygningen er revet eller brent.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BF">
+        <annotation>
+          <documentation>Kode for at bygningen er flyttet.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BygningsstatusKodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BygningstypeKodeType">
+    <annotation>
+      <documentation>beskrivelse av hva bygningen faktisk er brukt til, eventuelt hva bygningen er godkjent til. Skjermingsverdige bygningstyper er fjernet fra kodelista og representeres som bygningstype 999 i FKB.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BYGGTYP_NBR</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:BygningstypeKodeEnumerationType app:BygningstypeKodeOtherType"/>
+  </simpleType>
+  <simpleType name="BygningstypeKodeEnumerationType">
+    <annotation>
+      <documentation>beskrivelse av hva bygningen faktisk er brukt til, eventuelt hva bygningen er godkjent til. Skjermingsverdige bygningstyper er fjernet fra kodelista og representeres som bygningstype 999 i FKB.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">BYGGTYP_NBR</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="111">
+        <annotation>
+          <documentation>Enebolig; frittliggende bygning med kun en boligenhet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="112">
+        <annotation>
+          <documentation>Enebolig m/hybel/sokkelleil.; enebolig som i tillegg inneholder en eller flere hybler el.l., som minimum dekkes av SSBs krav til
+hybel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="113">
+        <annotation>
+          <documentation>Våningshus; enebolig på gårdsbruk, kan også omfatte enebolig med hybelleilighet, sokkelleilighet ol</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="121">
+        <annotation>
+          <documentation>Del av tomannsbolig-vertikal; bolighus med to boliger, inkl. våningshus på gårdsbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="122">
+        <annotation>
+          <documentation>Tomannsbolig; horisontaldelt; bolighus med to boliger, inkl. våningshus på gårdsbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="123">
+        <annotation>
+          <documentation>Del av våningh.tomannsb/vert.; bolighus med to boliger, inkl. våningshus på gårdsbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="124">
+        <annotation>
+          <documentation>Våningsh. tomannsb./horisont.; bolighus med to boliger, inkl. våningshus på gårdsbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="131">
+        <annotation>
+          <documentation>Del av rekkeh. m/3-4 boliger; del av rekkekhus med 3-4 boliger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="133">
+        <annotation>
+          <documentation>Del av kjede/atr.h innt.4 bol.; del av kjede-, atriumshus med inntil 4 boliger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="135">
+        <annotation>
+          <documentation>Terrassehus; større bolighus i bratt terreng hvor bygningen følger hellingen i terrenget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="136">
+        <annotation>
+          <documentation>Andre småhus med 3-4 boliger; andre småhus med 3 boliger eller flere</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="141">
+        <annotation>
+          <documentation>Stort frittl. boligbygg på 2 etasjer.; stort frittliggende boligbygg på 2 etasjer (5 boliger eller mer)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="142">
+        <annotation>
+          <documentation>Stort frittl. boligbygg på 3 og 4 etasj.; stort frittliggende boligbygg på 3 og 4 etasjer (5 boliger eller mer)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="143">
+        <annotation>
+          <documentation>Stort frittl. boligbygg på 5 -&gt; etasjer; boligblokk på 5 etasjer eller mer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="144">
+        <annotation>
+          <documentation>Stort sammenh.boligbygg på 2 etasjer; Store sammenbygde boligbygg på 3 og 4 etasjer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="145">
+        <annotation>
+          <documentation>Stort sammenh.boligbygg på 3 og 4 et; store sammenbygde boligbygg på 3 og 4 etasjer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="146">
+        <annotation>
+          <documentation>Stort sammenh.boligbygg på 5 -&gt; etasjer eller over (5 boliger eller mer); store sammenbygde boligbygg på 5 etasjer eller over (5 boliger eller mer)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="151">
+        <annotation>
+          <documentation>Bo- og servicesenter; bo- og servicesenter. For eldre, utviklingshemmede, funksjonshemmede mv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="152">
+        <annotation>
+          <documentation>Studenthjem/studentboliger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="159">
+        <annotation>
+          <documentation>Annen bygning for bofellesskap; annen bygning for bofellesskap, eller bygning som har nær tilknytning til / tjener slik(e) bygning(er)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="161">
+        <annotation>
+          <documentation>Fritidsbygg (hytter, sommerhus og lignende)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="162">
+        <annotation>
+          <documentation>Helårsb.benyttes som fritidsb.; helårsbolig utenom våningshus som benyttes som fritidsbolig.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="163">
+        <annotation>
+          <documentation>Våningh. benyttes som fritidsb; våningshus som benyttes som fritidsbolig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="171">
+        <annotation>
+          <documentation>Seterhus; sel; rorbu og lignende;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="172">
+        <annotation>
+          <documentation>Skogs- og utmarkskoie; gamme;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="181">
+        <annotation>
+          <documentation>Garasje ;uthus anneks til bolig; garasje, uthus , anneks knyttet til bolig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="182">
+        <annotation>
+          <documentation>Garasje; uth. anneks til fritidb; garasje, uthus , anneks knyttet til fritidsbolig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="183">
+        <annotation>
+          <documentation>Naust; båthus; sjøbu; frittliggende bygning som primært benyttes til plassering av båt(er). Kan i tillegg benyttes til oppbevaring av forskjellig redskap o.l</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="192">
+        <annotation>
+          <documentation>Kombinert bolig &lt; annet areal;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="193">
+        <annotation>
+          <documentation>Boligbrakker;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="199">
+        <annotation>
+          <documentation>Annen boligb.(Eks sekundærbolig reindr.);</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="211">
+        <annotation>
+          <documentation>Fabrikkbygning; bygning for industriell serieproduksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="212">
+        <annotation>
+          <documentation>Verkstedbygning; bygning for spesialproduksjon eller reparasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="213">
+        <annotation>
+          <documentation>Produksjonshall</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="214">
+        <annotation>
+          <documentation>Bygning for renseanlegg; bygning for renseanlegg, bl.a. kloakkpumpestasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="215">
+        <annotation>
+          <documentation>Bygning for avfallshåndtering;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="216">
+        <annotation>
+          <documentation>Bygn. for vannfors. bla. pumpest; bygning for vannforsyning, bl.a. pumpestasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="219">
+        <annotation>
+          <documentation>Annen industribygning; annen industribygning, eller bygning som har nær tilknytning til/tjener slik(e) bygning(er)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="222">
+        <annotation>
+          <documentation>Mindre kraftstasjon;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="224">
+        <annotation>
+          <documentation>Mindre transform.stasj./kiosk;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="231">
+        <annotation>
+          <documentation>Lagerhall;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="232">
+        <annotation>
+          <documentation>Kjøle- og fryselager;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="239">
+        <annotation>
+          <documentation>Annen lagerbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="241">
+        <annotation>
+          <documentation>Hus for dyr/landbr.lager/silo; hus for dyr, fôrlager, strølager, landbrukssilo, høy-/korntørke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="242">
+        <annotation>
+          <documentation>Landbruksgarasje/redskapshus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="243">
+        <annotation>
+          <documentation>Veksthus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="244">
+        <annotation>
+          <documentation>Driftsb. fiske/fangst/oppdr; driftsbygning for fiske og fangst, inkl. oppdrettsanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="245">
+        <annotation>
+          <documentation>Naust/redskapshus for fiske; naust / redskapshus for fiske</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="248">
+        <annotation>
+          <documentation>Annen fiskeri- og fangstbygn.;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="249">
+        <annotation>
+          <documentation>Annen landbruksbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="311">
+        <annotation>
+          <documentation>Kontor- og adm.bygning; rådhus; kontor- og administrasjonsbygning , rådhus.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="312">
+        <annotation>
+          <documentation>Bankbygning; posthus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="313">
+        <annotation>
+          <documentation>Radio og TV-hus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="319">
+        <annotation>
+          <documentation>Annen kontorbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="321">
+        <annotation>
+          <documentation>Kjøpesenter; varehus; bygning som inneholder flere forskjellige butikker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="322">
+        <annotation>
+          <documentation>Butikk/forretningsbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="323">
+        <annotation>
+          <documentation>Bensinstasjon;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="329">
+        <annotation>
+          <documentation>Annen forretningsbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="330">
+        <annotation>
+          <documentation>Messe- og kongressbygning; messe- og kongressbygning. Dette gjelder bygninger for messer, utstillinger, kongresser og konferanser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="411">
+        <annotation>
+          <documentation>Eksp.bygn. flyterm. kontr.tårn; ekspedisjonsbygning, flyterminal, kontrolltårn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="412">
+        <annotation>
+          <documentation>Jernbane- og T-banestasjon;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="415">
+        <annotation>
+          <documentation>Godsterminal;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="416">
+        <annotation>
+          <documentation>Postterminal;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="419">
+        <annotation>
+          <documentation>Annen eksp. og terminalbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="424">
+        <annotation>
+          <documentation>AM-stasjon (kortbølgestasjon);</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="431">
+        <annotation>
+          <documentation>Parkeringshus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="432">
+        <annotation>
+          <documentation>Bussgar.;trikke-lokomotivstall;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="433">
+        <annotation>
+          <documentation>Flyhangar;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="439">
+        <annotation>
+          <documentation>Annen garasje-/hangarbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="441">
+        <annotation>
+          <documentation>Biltilsynsbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="443">
+        <annotation>
+          <documentation>Vakt-/bombygn.tollst.; bilvekt;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="449">
+        <annotation>
+          <documentation>Annen veg- og trafikktilsynsbygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="490">
+        <annotation>
+          <documentation>Annen samf. og kom.bygn;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="511">
+        <annotation>
+          <documentation>Hotellbygning; større bygning for overnatting, godkjent etter hotelloven.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="512">
+        <annotation>
+          <documentation>Motellbygning; egentlig motorhotell, oftest beliggende langs en hovedferdselsåre.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="519">
+        <annotation>
+          <documentation>Annen hotellbygning; annen bygning for overnatting - godkjent etter hotelloven. , eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="521">
+        <annotation>
+          <documentation>Hospits; pensjonat; rimelig, enkelt utstyrt overnattingssted, vanligvis serveres også mat. I byene ofte leid ut på mer fast basis; over uker, måneder eller år.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="522">
+        <annotation>
+          <documentation>Vandre-feriehjem;turisthytte; rimelig nattelosji, ofte knyttet til medlemskap i en forening.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="523">
+        <annotation>
+          <documentation>Appartement; bygning med fritidsboliger/ boliger til utleie, boligene har bad og kokemuligheter, og leies oftest for døgn- eller ukebasis.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="524">
+        <annotation>
+          <documentation>Camping- /utleiehytte; enklere overnattingshytte fortrinnsvis beregnet for bilturister. Som regel er de knyttet til en campingplass. Gjestene holder vanligvis sengetøy selv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="531">
+        <annotation>
+          <documentation>Restaurantbygning; kafébygning; Restaurantbygning eller  kafébygning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="532">
+        <annotation>
+          <documentation>Sentralkjøkken; kantinebygning; bygning for kjøkken eller kantine tilknyttet større enhet, men der bygningen ligger for seg selv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="533">
+        <annotation>
+          <documentation>Gatekjøkken; kioskbygning; gatekjøkken, kioskbygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="539">
+        <annotation>
+          <documentation>Annen restaurantbygning; andre spisesteder som ikke passer inn i kodene over, eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="590">
+        <annotation>
+          <documentation>Annen hotell og rest.bygn;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="611">
+        <annotation>
+          <documentation>Lekepark; sted for opphold for barn 1-5 år. Oftest 4-5 timers tilbud, men kan også være heldag. Ingen krav til pedagogisk innhold, og selve huset i lekeparken er ofte lite og dårlig utstyrt, nærmest som
+spiserom å betrakte. En lekepark er i stor grad basert på at barna skal være ute og leke.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="612">
+        <annotation>
+          <documentation>Barnehage; sted for opphold for barn 1 - 5 år. Kan være heldag og halvdag, og det er knyttet et visst pedagogisk innhold til oppholdet. Selve barnehagebygningen er ofte velutstyrt, med flere avdelinger, spiserom/hvilerom for de ansatte og kjøkken. Styrt av Barnehageloven</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="613">
+        <annotation>
+          <documentation>Barneskole; skolebygning for skoleklassene 1-7, for barn i alderen 6-12 år.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="614">
+        <annotation>
+          <documentation>Ungdomsskole; skolebygning for skoleklassene 8-10, for barn i alderen 13-15 år.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="615">
+        <annotation>
+          <documentation>Kombinert barne- og ungdomsskole; skolebygning for skoleklassene 1-10, for barn i alderen 6-15 år.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="616">
+        <annotation>
+          <documentation>Videregående skole; skolebygning for skole etter grunnskolen. Allmennfaglig eller yrkesrettet.Ikke høgskole</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="619">
+        <annotation>
+          <documentation>Annen skolebygning; andre skoler som ikke passer inn under ovennevnte kategorier, eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="621">
+        <annotation>
+          <documentation>Univ./høgskole m/auditor.leses; universitets- og høgskolebygning med integrerte funksjoner, auditorium, lesesal mv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="622">
+        <annotation>
+          <documentation>Spesialbygning;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="623">
+        <annotation>
+          <documentation>Bygninger for laboratorievirksomhet (f.eks. i industri, sykehus og ved universiteter).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="629">
+        <annotation>
+          <documentation>Annen universitet/høgskolebygn;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="641">
+        <annotation>
+          <documentation>Museum; kunstgalleri; bygning for utstilling av spesielle gjenstander, og omtale av disse (museum) eller bygning for utstilling og salg av kunst (kunstgalleri)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="642">
+        <annotation>
+          <documentation>Bibliotek; mediatek; bygning for utlån av bøker, lydbøker, filmer, aviser o.l. Moderne bibliotek/mediatek har ofte tilgjengelig PC gjerne med Internett-tilknytning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="643">
+        <annotation>
+          <documentation>Zoologisk/botanisk hage (byg.); bygninger i tilknytning til zoologisk og botanisk hage, gjelder også utstillingsbygninger i dyrepark.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="649">
+        <annotation>
+          <documentation>Annen museum/biblioteksbygning; bygninger som ikke passer inn under ovennevnte kategorier , eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="651">
+        <annotation>
+          <documentation>Idrettshall; bygning primært til bruk for idrettsformål, innehar som regel også garderobeanlegg og kiosk.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="652">
+        <annotation>
+          <documentation>Ishall; bygning primært brukt som skøytehall for lengdeløp og ishockey, innehar som regel også garderobeanlegg og kiosk.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="653">
+        <annotation>
+          <documentation>Svømmehall; bygning for innendørs badeanlegg som brukes til undervisning, mosjon, trening og konkurranser.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="654">
+        <annotation>
+          <documentation>Tribune og idrettsgarderobe; innebygd tribuneanlegg til utendørs idrettsanlegg (tribune) eller bygning for garderobe i tilknytning til idrettsanlegg (idrettsgarderobe)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="655">
+        <annotation>
+          <documentation>Helsestudio; kompakt treningsanlegg, drevet på forretningsmessig basis - ikke offentlig.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="659">
+        <annotation>
+          <documentation>Annen idrettsbygning; andre idrettsbygninger som ikke passer inn under ovennevnte kategorier , eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="661">
+        <annotation>
+          <documentation>Kino/teater/opera/konsertbygn; bygning for framføring av kino, teater, opera og konserter.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="662">
+        <annotation>
+          <documentation>Samfunnshus; grendehus; sentralt aktivitetshus for bygda/grenda, multifunksjonsbygg som benyttes til alt fra idrettsarrangementer til fest og andre sosiale sammenkomster.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="663">
+        <annotation>
+          <documentation>Diskotek; bygning for ungdomsaktiviteter, særlig knyttet til musikk og dans - drevet på forretningsmessig basis.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="669">
+        <annotation>
+          <documentation>Annet kulturhus; andre multifunksjonshus for kultur og idrett, herunder ungdomsklubb, som ikke passer inn under ovennevnte kategorier , eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="671">
+        <annotation>
+          <documentation>Kirke; kapell; kristent gudshus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="672">
+        <annotation>
+          <documentation>Bedehus; menighetshus; kristent forsamlingshus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="673">
+        <annotation>
+          <documentation>Kremat.; gravkapell; bårehus; bygning for likbrenning (krematorium) eller bygning for oppbevaring av døde mennesker inntil begravelse og kremasjon (gravkapell og bårehus).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="674">
+        <annotation>
+          <documentation>Synagoge; moske; jødisk gudshus (synagoge) eller muslimsk gudshus (moské)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="675">
+        <annotation>
+          <documentation>Kloster; bygning der menn eller kvinner har trukket seg tilbake for å virkeliggjøre det religiøse ideal, i et lukket samfunn, og etter en bestemt regel.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="679">
+        <annotation>
+          <documentation>Annen bygn. for religiøs akt.; bygninger som ikke passer inn under ovennevnte kategorier, eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="711">
+        <annotation>
+          <documentation>Lokalsykehus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="712">
+        <annotation>
+          <documentation>Sentralsykehus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="713">
+        <annotation>
+          <documentation>Region-; universitetssykehus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="714">
+        <annotation>
+          <documentation>Spesialsykehus;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="719">
+        <annotation>
+          <documentation>Annet sykehus; private sykehus eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).
+
+Merknad:
+Dette gjelder bygninger for lokalsykehus, sentralsykehus, regionsykehus og universitetssykehus.
+Typen omfatter også spesialsykehus, f.eks. psykiatriske sykehus, rehabiliteringssykehus,
+reumatiske sykehus, kreftsykehus o.a.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="721">
+        <annotation>
+          <documentation>Sykehjem;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="722">
+        <annotation>
+          <documentation>Bo- og behandlingssenter; aldershjem; institusjoner der man bor permanent og samtidig har tilgang til et behandlingstilbud.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="723">
+        <annotation>
+          <documentation>Rehabiliter.institusjon.kurbad; institusjon der man bor for en kortere eller lengre periode, samtidig som man får behandling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="729">
+        <annotation>
+          <documentation>Annet sykehjem; annet sykehjem, eller bygning som har nær tilknytning til/tjener slik(e) bygning(er).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="731">
+        <annotation>
+          <documentation>Klinikk; legekontor/legesenter; klinikk, legekontor/-senter/-vakt.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="732">
+        <annotation>
+          <documentation>Helse-/sosialsent. helsestasj.; senter som inneholderflere tilbud som f.eks. fysioterapi, kiroprakti, akupunktur, alternative behandlingsformer etc.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="739">
+        <annotation>
+          <documentation>Annen primærhelsebygning; annen primærhelsebygning, eller bygning som har nær tilknytning til/tjener slik(e) bygning(er)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="811">
+        <annotation>
+          <documentation>Landsfengsel;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="812">
+        <annotation>
+          <documentation>Hjelpefengsel; kretsfengsel;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="813">
+        <annotation>
+          <documentation>Arbeidskoloni;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="821">
+        <annotation>
+          <documentation>Politistasjon;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="822">
+        <annotation>
+          <documentation>Brannstasjon; ambulansestasjon;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="823">
+        <annotation>
+          <documentation>Fyrstasjon; losstasjon;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="830">
+        <annotation>
+          <documentation>Monument; konstruksjoner som er minnesmerker eller kunstverker. Må tilfredsstille krav til bygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="840">
+        <annotation>
+          <documentation>Offentlig toalett;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="890">
+        <annotation>
+          <documentation>Annet fengsel-/ beredskapsbyg. mv.;</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="529">
+        <annotation>
+          <documentation>Annen bygning for overnatting; andre bygninger som ikke kan plasseres i de underpunktene nevnt over, men som er bygning for overnatting, eller bygning som har nær tilknytning til/tjener slik(e) bygning(er)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="999">
+        <annotation>
+          <documentation>Ukjent eller skjermet bygningstype. Bygningen er registrert i matrikkelen, men bygningstype er ikke tilgjengelig.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BygningstypeKodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element abstract="true" name="Bygningsvedheng" substitutionGroup="app:KvalitetPåkrevd" type="app:BygningsvedhengType">
+    <annotation>
+      <documentation>bygningsdetaljer som ligger i tilknytning til  bygningen, og som ikke er knyttet til bygningens avgrensning</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="BygningsvedhengType">
+    <complexContent>
+      <extension base="app:KvalitetPåkrevdType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BygningsvedhengPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Bygningsvedheng"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="DatafangstdatoOpsjonell" substitutionGroup="app:Fellesegenskaper" type="app:DatafangstdatoOpsjonellType">
+    <annotation>
+      <documentation>Posisjonskvalitet er opsjonell. Brukes stort sett på fiktive linjer i FKB</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="DatafangstdatoOpsjonellType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element minOccurs="0" name="datafangstdato" type="date">
+            <annotation>
+              <documentation>dato når objektet siste gang ble registrert/observert/målt i terrenget</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">DATAFANGSTDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="DatafangstdatoOpsjonellPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:DatafangstdatoOpsjonell"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Fasadeliv" substitutionGroup="app:Fasaderiss" type="app:FasadelivType">
+    <annotation>
+      <documentation>bygningens ytre avgrensing i fasaderiss</documentation>
+    </annotation>
+  </element>
+  <complexType name="FasadelivType">
+    <complexContent>
+      <extension base="app:FasaderissType">
+        <sequence>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydereferanse" type="app:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skalAvgrenseBygning" type="boolean">
+            <annotation>
+              <documentation>angivelse av om fasadeliv skal benyttes til å danne bygningsflate. Defaultverdi er Nei, dvs. at fasadeliv kun benyttes til flateavgrensning dersom skalAvgrenseBygning = Ja.
+
+Merknad:
+Fasadeliv (hele eller deler av fasaden) vil i mange tilfeller eksistere i tillegg til Takkant. Egenskapen kan da benyttes til å angi at enten takriss eller fasadelivriss skal danne Bygningsavgrensning for bygningsflaten (normalt benyttes Takkant til riss hvis begge eksisterer).</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SKAL_AVGR_BYGN</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FasadelivPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Fasadeliv"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="Fasaderiss" substitutionGroup="app:Bygningsavgrensning" type="app:FasaderissType">
+    <annotation>
+      <documentation>bygningens avgrensning i form av  fasadeliv, fiktiv bygningsavgrensning og/eller bygningsdelelinje</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="FasaderissType">
+    <complexContent>
+      <extension base="app:BygningsavgrensningType">
+        <sequence/>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FasaderissPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Fasaderiss"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="app:FellesegenskaperType">
+    <annotation>
+      <documentation>abstrakt objekt som bærer en felles egenskaper som brukes på fiktive linjer i FKB</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="FellesegenskaperType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="identifikasjon" type="app:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>Unik identifikasjon av objektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="registreringsversjon" type="app:RegistreringsversjonPropertyType">
+            <annotation>
+              <documentation>angivelse av hvilken produktspesifikasjon som er utgangspunkt for dataene</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="verifiseringsdato" type="date">
+            <annotation>
+              <documentation>dato når dataene er fastslått å være i samsvar med virkeligheten</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERIFISERINGSDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+            <annotation>
+              <documentation>dato for siste endring på objektetdataene. Oppdateringsdato settes automatisk ved lagring i forvaltningssytemet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">OPPDATERINGSDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="informasjon" type="string">
+            <annotation>
+              <documentation>generell opplysning
+
+Merknad:
+mulighet til å legge inn utfyllende informasjon om objektet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">INFORMASJON</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosesshistorie" type="string">
+            <annotation>
+              <documentation>beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene
+
+Merknad:
+Prosesshistorie vil kunne inneholde informasjon om transformasjoner. Hva slags informasjon som angis er ofte gitt i andre standarder, f.eks kvalitet og kvalitetsikring.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PROSESS_HISTORIE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kopidata" type="app:KopidataPropertyType">
+            <annotation>
+              <documentation>angivelse av at objektet er hentet fra et kopidatasett og ikke fra originaldatasettet
+
+Merknad: Inneholder informasjon om når kopidatasettet ble kopiert fra originaldatasettet og hvem som er originaldataansvarlig</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FellesegenskaperPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Fellesegenskaper"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="FiktivBygningsavgrensning" substitutionGroup="app:KvalitetOpsjonell" type="app:FiktivBygningsavgrensningType">
+    <annotation>
+      <documentation>fiktiv avgrensing av bygning
+Merknad: Brukes når deler av takkant, fasadeliv, grunnmur eller bygningsdelelinje er ukjent for at det skal bli mulig å danne en flate.  Fiktiv bygningsavgrensing benyttes også for å lage flater for underjordiske bygninger og som fiktiv linje på takoverbygg der takoverbyggkant mangler.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FiktivBygningsavgrensningType">
+    <complexContent>
+      <extension base="app:KvalitetOpsjonellType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FiktivBygningsavgrensningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:FiktivBygningsavgrensning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Grunnmur" substitutionGroup="app:Grunnmurriss" type="app:GrunnmurType">
+    <annotation>
+      <documentation>bygningens ytteravgrensning langs grunnmur
+Merknad: Høydereferanse  angis med høydereferanse. Grunnrissreferanse er ytterkant av grunnmur.
+Merknad: Kan benyttes for bygning under oppføring eller for bygning som er revet/nedbrent</documentation>
+    </annotation>
+  </element>
+  <complexType name="GrunnmurType">
+    <complexContent>
+      <extension base="app:GrunnmurrissType">
+        <sequence>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydereferanse" type="app:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GrunnmurPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Grunnmur"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="Grunnmurriss" substitutionGroup="app:Bygningsavgrensning" type="app:GrunnmurrissType">
+    <annotation>
+      <documentation>bygningens avgrensning i form av grunnmur, fiktiv bygningsavgrensning og/eller bygningsdelelinje</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="GrunnmurrissType">
+    <complexContent>
+      <extension base="app:BygningsavgrensningType">
+        <sequence/>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GrunnmurrissPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Grunnmurriss"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Hjelpelinje3D" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:Hjelpelinje3DType">
+    <annotation>
+      <documentation>linje for å kunne danne gode 3D modeller av bygninger</documentation>
+    </annotation>
+  </element>
+  <complexType name="Hjelpelinje3DType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Hjelpelinje3DPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Hjelpelinje3D"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Hjelpepunkt3D" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:Hjelpepunkt3DType">
+    <annotation>
+      <documentation>punkt for å kunne danne gode 3-D modeller av oppstikkende detaljer som for eksempel spir</documentation>
+    </annotation>
+  </element>
+  <complexType name="Hjelpepunkt3DType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Punkt</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Hjelpepunkt3DPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Hjelpepunkt3D"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Høyde" substitutionGroup="gml:AbstractObject" type="app:HøydeType">
+    <annotation>
+      <documentation>et punkts vertikale avstand over en fysisk eller matematisk definert referanseflate</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HØYDE</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="HøydeType">
+    <sequence/>
+  </complexType>
+  <complexType name="HøydePropertyType">
+    <sequence>
+      <element ref="app:Høyde"/>
+    </sequence>
+  </complexType>
+  <element name="HøydeOverBakken" substitutionGroup="gml:AbstractObject" type="app:HøydeOverBakkenType">
+    <annotation>
+      <documentation>objekts høyde over bakken
+
+Merknad:
+Kan være aktuelt i forbindelse med ulike typer objekter med utstrekning i høyde, slik som telefonstolper, gjerde, etc. Må brukes med forsiktighet og det må komme klart fram hvilke detalj av objektet eller objektets overbygning høyden relateres til.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HOB</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="HøydeOverBakkenType">
+    <sequence/>
+  </complexType>
+  <complexType name="HøydeOverBakkenPropertyType">
+    <sequence>
+      <element ref="app:HøydeOverBakken"/>
+    </sequence>
+  </complexType>
+  <simpleType name="HøydereferanseType">
+    <annotation>
+      <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:HøydereferanseEnumerationType app:HøydereferanseOtherType"/>
+  </simpleType>
+  <simpleType name="HøydereferanseEnumerationType">
+    <annotation>
+      <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="FOT"/>
+      <enumeration value="TOP"/>
+      <enumeration value="UKJENT">
+        <annotation>
+          <documentation>benyttes ikke ved nyregistrering</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HøydereferanseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="app:IdentifikasjonType">
+    <annotation>
+      <documentation>Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet.
+
+NOTE1 Denne eksterne objektidentifikasjonen må ikke forveksles med en tematisk objektidentifikasjon, slik som f.eks bygningsnummer.
+
+NOTE 2 Denne unike identifikatoren vil ikke endres i løpet av kartobjektets levetid.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">IDENT</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string">
+        <annotation>
+          <documentation>identifikator som er lokalt unik innenfor navnerommet. For FKB benyttes UUID.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LOKALID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="navnerom" type="string">
+        <annotation>
+          <documentation>navnerom i form av en URI.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NAVNEROM</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="versjonId" type="string">
+        <annotation>
+          <documentation>identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. Benyttes normalt ikke i FKB.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERSJONID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="app:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <simpleType name="InnmålingsstatusType">
+    <annotation>
+      <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet.
+
+Egenskapen aggregeres fra omrisset etter følgende regler:
+Dersom alle avgrensingslinjene har en fotogrammetrisk kvalitet (målemetode 20-24), har egenskapen registreringsversjon og alle punkter i linjene har høyde brukes verdien "Konstruert".
+Dersom en eller flere av objektene i omrisset har objekttype BygningsavgrensningTiltak, eller har målemetode 18 -Tatt fra plan, eller 80,81,82 - Frihåndstegning, brukes verdien "Tatt fra plan".
+For øvrige data (alle objekter i omrisset har en kvalitetskode som tilsier at dataene er innmålt i terrenget, men ikke nødvendigvis i henhold til fotogrammetrisk registreringsinstruks) brukes "Innmålt"</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">INNMÅLINGSSTATUS</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:InnmålingsstatusEnumerationType app:InnmålingsstatusOtherType"/>
+  </simpleType>
+  <simpleType name="InnmålingsstatusEnumerationType">
+    <annotation>
+      <documentation>informasjon om datagrunnlaget til omrisset i til bygningen i kartet.
+
+Egenskapen aggregeres fra omrisset etter følgende regler:
+Dersom alle avgrensingslinjene har en fotogrammetrisk kvalitet (målemetode 20-24), har egenskapen registreringsversjon og alle punkter i linjene har høyde brukes verdien "Konstruert".
+Dersom en eller flere av objektene i omrisset har objekttype BygningsavgrensningTiltak, eller har målemetode 18 -Tatt fra plan, eller 80,81,82 - Frihåndstegning, brukes verdien "Tatt fra plan".
+For øvrige data (alle objekter i omrisset har en kvalitetskode som tilsier at dataene er innmålt i terrenget, men ikke nødvendigvis i henhold til fotogrammetrisk registreringsinstruks) brukes "Innmålt"</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">INNMÅLINGSSTATUS</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="planlagt">
+        <annotation>
+          <documentation>Dataene er hentet fra en byggeplan og er ikke verifisert/innmålt i terrenget. Angitt nøyaktighet er et anslag.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innmålt">
+        <annotation>
+          <documentation>Data er verifisert/innmålt i terrenget ved bruk av landmåling eller andre metoder (som bygget dokumentasjon)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="konstruert">
+        <annotation>
+          <documentation>Data er verifisert i terrenget og konstruert i henhold til fotogrammetrisk registreringsinstruks</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnmålingsstatusOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="KantUtsnitt" substitutionGroup="gml:AbstractFeature" type="app:KantUtsnittType">
+    <annotation>
+      <documentation>avgrensning av et utsnitt. I FKB lagres KantUtsnitt ikke i forvaltningsbasen men kan benyttes for å lage komplette flateavgrensninger ved klipping av et område ut fra forvaltningsbasen. KantUtsnitt kan derfor finnes i fileksporter.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KantUtsnittType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger overgang mellom ulike fenomener</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="identifikasjon" type="app:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>unik identifikasjon av det enkelte kartobjektet</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KantUtsnittPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:KantUtsnitt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Kopidata" substitutionGroup="gml:AbstractObject" type="app:KopidataType">
+    <annotation>
+      <documentation>angivelse av at objektet er hentet fra en kopi av originaldata
+
+Merknad:
+Kan benyttes dersom man gjør et uttak av en database som ikke inneholder originaldataene.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOPIDATA</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="KopidataType">
+    <sequence>
+      <element name="områdeId" type="integer">
+        <annotation>
+          <documentation>identifikasjon av område som dataene dekker
+
+Merknad: Kan angis med kommunenummer eller fylkesnummer. Disse bør spesifiseres nærmere.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">OMRÅDEID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="originalDatavert" type="string">
+        <annotation>
+          <documentation>ansvarlig etat for forvaltning av data</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ORIGINALDATAVERT</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="kopidato" type="date">
+        <annotation>
+          <documentation>dato når objektet ble kopiert fra originaldatasettet
+
+Merknad:
+Er en del av egenskapen Kopidata. Brukes i de tilfeller hvor en kopidatabase brukes til distribusjon.
+Å kopiere et datasett til en kopidatabase skal ikke føre til at Oppdateringsdato blir endret.
+Eventuell redigering av data i et kopidatasett medfører ny Oppdateringsdato, Datafangstdato og/eller Verifiseringsdato.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOPIDATO</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="KopidataPropertyType">
+    <sequence>
+      <element ref="app:Kopidata"/>
+    </sequence>
+  </complexType>
+  <element abstract="true" name="KvalitetOpsjonell" substitutionGroup="app:Fellesegenskaper" type="app:KvalitetOpsjonellType">
+    <annotation>
+      <documentation>Posisjonskvalitet er opsjonell. Brukes stort sett på fiktive linjer i FKB</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="KvalitetOpsjonellType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element minOccurs="0" name="kvalitet" type="app:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+            </annotation>
+          </element>
+          <element name="datafangstdato" type="date">
+            <annotation>
+              <documentation>dato når objektet siste gang ble registrert/observert/målt i terrenget</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">DATAFANGSTDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KvalitetOpsjonellPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:KvalitetOpsjonell"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="KvalitetPåkrevd" substitutionGroup="app:Fellesegenskaper" type="app:KvalitetPåkrevdType">
+    <annotation>
+      <documentation>Posisjonskvalitet påkrevd. Brukes stort sett på på kurve- og punktobjekter i FKB.</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="KvalitetPåkrevdType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="kvalitet" type="app:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen
+
+Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.</documentation>
+            </annotation>
+          </element>
+          <element name="datafangstdato" type="date">
+            <annotation>
+              <documentation>dato når objektet siste gang ble registrert/observert/målt i terrenget</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">DATAFANGSTDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KvalitetPåkrevdPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:KvalitetPåkrevd"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Låvebru" substitutionGroup="app:Bygningsvedheng" type="app:LåvebruType">
+    <annotation>
+      <documentation>kjørerampe til et landbruksbygg
+Merknad: Kjørerampe i tilknytning til et industri og lagerbygg beskrives som Annet vegareal/avkjørsel og Brukonstruksjon</documentation>
+    </annotation>
+  </element>
+  <complexType name="LåvebruType">
+    <complexContent>
+      <extension base="app:BygningsvedhengType">
+        <sequence/>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LåvebruPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Låvebru"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MediumType">
+    <annotation>
+      <documentation>objektets beliggenhet i forhold til jordoverflaten
+
+Eksempel:
+Veg på bro, i tunnel, inne i et bygningsmessig anlegg, etc.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MediumEnumerationType app:MediumOtherType"/>
+  </simpleType>
+  <simpleType name="MediumEnumerationType">
+    <annotation>
+      <documentation>objektets beliggenhet i forhold til jordoverflaten
+
+Eksempel:
+Veg på bro, i tunnel, inne i et bygningsmessig anlegg, etc.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="V">
+        <annotation>
+          <documentation>Alltid i vann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B">
+        <annotation>
+          <documentation>I bygning/bygningsmessig anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L">
+        <annotation>
+          <documentation>I luft</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="I">
+        <annotation>
+          <documentation>På isbre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>På sjøbunnen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T">
+        <annotation>
+          <documentation>På terrenget/på bakkenivå (default-verdi)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="O">
+        <annotation>
+          <documentation>På vannoverflaten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="D">
+        <annotation>
+          <documentation>Tidvis under vann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="J">
+        <annotation>
+          <documentation>Under isbre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="W">
+        <annotation>
+          <documentation>Under sjøbunnen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="U">
+        <annotation>
+          <documentation>Under terrenget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="X">
+        <annotation>
+          <documentation>ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MediumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeType">
+    <annotation>
+      <documentation>metode som ligger til grunn for registrering av posisjon</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MålemetodeEnumerationType app:MålemetodeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeEnumerationType">
+    <annotation>
+      <documentation>metode som ligger til grunn for registrering av posisjon</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Målt i terrenget , uspesifisert metode/måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="11">
+        <annotation>
+          <documentation>Målt i terrenget med totalstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>Målt i terrenget med teodolitt og elektronisk avstandsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="13">
+        <annotation>
+          <documentation>Målt i terrenget med teodolitt og målebånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14">
+        <annotation>
+          <documentation>Målt i terrenget, ortogonalmetoden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15">
+        <annotation>
+          <documentation>Punkt beregnet på bakgrunn av måling mot andre punkter, slik som to avstander eller avstand og retning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="18">
+        <annotation>
+          <documentation>Tatt fra plan eller godkjent tiltak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>Annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>Målt i stereoinstrument, uspesifisert instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="21">
+        <annotation>
+          <documentation>Punkt beregnet ved aerotriangulering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>Målt i stereoinstrument, analytisk plotter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="23">
+        <annotation>
+          <documentation>Målt i stereoinstrument, autograf, analogt instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>Målt i stereoinstrument, digitalt instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="30">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner, uspesifisert kartmedium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="31">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er blyantoriginal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="32">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er rissefolie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="33">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av  god kvalitet.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="34">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av mindre god kvalitet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="35">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er papirkopi.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>Målt med laserskanner fra fly</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="37">
+        <annotation>
+          <documentation>Målt med laserskanner plassert i kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="38">
+        <annotation>
+          <documentation>brukes for objekter som er stedfestet med lineær referanse, enten disse leveres med stedfesting kun som lineære referanser, eller med koordinatgeometri avledet fra lineære referanser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="39">
+        <annotation>
+          <documentation>Målt med laserskanner fra instrument på bakken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="40">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto eller flybilde ved hjelp av manuell registrering på et digitaliseringsbord, uspesifisert bildemedium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="41">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="42">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="43">
+        <annotation>
+          <documentation>Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="44">
+        <annotation>
+          <documentation>Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="45">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på skjerm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="46">
+        <annotation>
+          <documentation>Geometri overført fra satellittbilde ved hjelp av manuell registrering på skjerm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="47">
+        <annotation>
+          <documentation>Digitalisert på skjerm fra andre digitale rasterdata</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="48">
+        <annotation>
+          <documentation>Digitalisert på skjerm fra tolkning av seismikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="49">
+        <annotation>
+          <documentation>Vektorisering fra laserdata, brukes også der vektoriseringen støttes av ortofoto</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="50">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord, medium uspesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="51">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er blyantoriginal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="52">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er rissefolie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="53">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av god kvalitet, samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="54">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av mindre god kvalitet, samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="55">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er papirkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="56">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på skjerm, medium skannet kart (raster), samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode. Ikke nærmere spesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="61">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode, fra terrengmodell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="62">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode, vektet middel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>Genererte data: Sirkelgeometri, korridor eller annen geometri generert ut fra f.eks et punkt eller en linje (f.eks midtlinje veg)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="64">
+        <annotation>
+          <documentation>Genererte data: Generalisering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="65">
+        <annotation>
+          <documentation>Genererte data: Sentralpunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="66">
+        <annotation>
+          <documentation>Genererte data: Sammenknytningspunkt (f.eks mellom ulike kartlegginger), randpunkt (f.eks mellom ulike kilder til kart)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="67">
+        <annotation>
+          <documentation>Koordinater hentet fra GAB/Matrikkelen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="68">
+        <annotation>
+          <documentation>Koordinater hentet fra JREG, jordregisteret</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="69">
+        <annotation>
+          <documentation>Beregnet, uspesifisert hvordan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>Spesielle metoder, uspesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="71">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stikkstang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="72">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med waterstang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="73">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med målehjul</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="74">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stigningsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="75">
+        <annotation>
+          <documentation>Data generert ved bildematching</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="77">
+        <annotation>
+          <documentation>Punkt fastsatt ut fra et grunnlag (kart, bilde), f.eks ved partenes enighet ved en oppmålingsforretning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="78">
+        <annotation>
+          <documentation>Geometri fastsatt ved dom, lov, traktat eller kongelig resolusjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="79">
+        <annotation>
+          <documentation>Annet (spesifiseres i filhode)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="80">
+        <annotation>
+          <documentation>Digitalisert ut fra frihåndstegning.  Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="81">
+        <annotation>
+          <documentation>Digitalisert fra krokering på kart, dvs grovt skissert på kart</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="82">
+        <annotation>
+          <documentation>Digitalisert ut fra frihåndstegning (direkte på skjerm). Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>Treghetsstedfesting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="91">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, relative målinger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="92">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, enkle målinger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="93">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling statisk måling.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="94">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling andre metoder.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="95">
+        <annotation>
+          <documentation>Kombinasjon av GPS/Treghet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO).: Fasemåling RTK (realtids kinematisk måling)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="97">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO). Fasemåling float-løsning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="99">
+        <annotation>
+          <documentation>Målemetode er ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MålemetodeHøydeEnumerationType app:MålemetodeHøydeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeEnumerationType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Terrengmålt: Uspesifisert måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="11">
+        <annotation>
+          <documentation>Terrengmålt: Totalstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>Terrengmålt: Teodolitt og el avstandsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="13">
+        <annotation>
+          <documentation>Terrengmålt: Teodolitt og målebånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14">
+        <annotation>
+          <documentation>Terrengmålt: Ortogonalmetoden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15">
+        <annotation>
+          <documentation>Nivellement</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="18">
+        <annotation>
+          <documentation>Tatt fra plan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>Annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>Stereoinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="21">
+        <annotation>
+          <documentation>Aerotriangulert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>Stereoinstrument: Analytisk plotter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="23">
+        <annotation>
+          <documentation>Stereoinstrument: Autograf</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>Stereoinstrument: Digitalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>Flybåren laserscanning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>Genererte data (interpolasjon)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="61">
+        <annotation>
+          <documentation>Genererte data (interpolasjon): Terrengmodell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="62">
+        <annotation>
+          <documentation>Genererte data (interpolasjon): Vektet middel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>Genererte data: Fra annen geometri</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="64">
+        <annotation>
+          <documentation>Genererte data: Generalisering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="66">
+        <annotation>
+          <documentation>Genererte data: Sammenknytningspunkt, randpunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="67">
+        <annotation>
+          <documentation>Koordinater hentet fra GAB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="68">
+        <annotation>
+          <documentation>Koordinater hentet fra JREG</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="69">
+        <annotation>
+          <documentation>Beregnet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>Spesielle metoder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="74">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stigningsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="78">
+        <annotation>
+          <documentation>Fastsatt ved dom eller kongelig resolusjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="79">
+        <annotation>
+          <documentation>Annet (spesifiseres i filhode)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>Treghetsstedfesting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="91">
+        <annotation>
+          <documentation>GNSS: Kodemåling, relative målinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="92">
+        <annotation>
+          <documentation>GNSS: Kodemåling, enkle målinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="93">
+        <annotation>
+          <documentation>GNSS: Fasemåling, statisk måling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="94">
+        <annotation>
+          <documentation>GNSS: Fasemåling, andre metoder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="95">
+        <annotation>
+          <documentation>Kombinasjon av GNSS/Treghet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>GNSS: Fasemåling RTK</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="99">
+        <annotation>
+          <documentation>Ukjent målemetode</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Mønelinje" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:MønelinjeType">
+    <annotation>
+      <documentation>linje som beskriver den horisontale knekklinje på toppen av taket (høyeste topp)</documentation>
+    </annotation>
+  </element>
+  <complexType name="MønelinjeType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="MønelinjePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Mønelinje"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Portrom" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:PortromType">
+    <annotation>
+      <documentation>avgrensing av en tunnel gjennom en bygning</documentation>
+    </annotation>
+  </element>
+  <complexType name="PortromType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="høydereferanse" type="app:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PortromPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Portrom"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="app:PosisjonskvalitetType">
+    <annotation>
+      <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KVALITET</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="PosisjonskvalitetType">
+    <sequence>
+      <element name="målemetode" type="app:MålemetodeType">
+        <annotation>
+          <documentation>metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss</documentation>
+        </annotation>
+      </element>
+      <element name="nøyaktighet" type="integer">
+        <annotation>
+          <documentation>punktstandardavviket i grunnriss for punkter samt tverravvik for linjer
+
+Merknad:
+Oppgitt i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="synbarhet" type="app:SynbarhetType">
+        <annotation>
+          <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="målemetodeHøyde" type="app:MålemetodeHøydeType">
+        <annotation>
+          <documentation>metode for å måle høyden</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighetHøyde" type="integer">
+        <annotation>
+          <documentation>nøyaktighet for høyden i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetPropertyType">
+    <sequence>
+      <element ref="app:Posisjonskvalitet"/>
+    </sequence>
+  </complexType>
+  <element name="Registreringsversjon" substitutionGroup="gml:AbstractObject" type="app:RegistreringsversjonType">
+    <annotation>
+      <documentation>angir hvilken versjon av registreringsinstruksen som ble benyttet ved datafangst
+
+Eksempel:
+I et datasett kan det finnes objekter som er etablert fra ulike registreringsversjoner. For eksempel har registreringsinstruksen for objekttypen Takkant i FKB blitt endret fra SOSI/FKB-versjon 3.4 til versjon 4.0. Dersom en kommune ønsker å ajourføre Takkant for et delområde av kommunen etter FKB/SOSI-versjon 4.0, vil han etter ajourføring ha et kommunedekkende datasett der Takkant er registrert med forskjellig registreringsinstruks. I disse tilfellene kan det være nyttig å kunne skille på objektnivå hvilken registreringsversjon som er benyttet ved datafangst. Egenskapen kan benyttes til dette.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">REGISTRERINGSVERSJON</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="RegistreringsversjonType">
+    <sequence>
+      <element name="produkt" type="string">
+        <annotation>
+          <documentation>entydig navn på produktet i form av et kortnavn
+
+NB. Denne burde vært samordnet med Objektkatalog/Kortnavn som brukes i SOSI-hode på SOSI-format-datasett. Øker lengden fra 15 til 50 som den føste tilpasningen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PRODUKT</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="versjon" type="string">
+        <annotation>
+          <documentation>versjonsnummer</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERSJON</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="undertype" type="string">
+        <annotation>
+          <documentation>brukes for å skille mellom undertyper av en versjon, dvs. endringer i registeringsinstruks for et objekt</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">UNDERVERSJON</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="RegistreringsversjonPropertyType">
+    <sequence>
+      <element ref="app:Registreringsversjon"/>
+    </sequence>
+  </complexType>
+  <element name="SefrakIdent" substitutionGroup="gml:AbstractObject" type="app:SefrakIdentType">
+    <annotation>
+      <documentation>Entydig ident for sefrakobjekter som er brukt i blant annet rapport for Bygninger fra matrikkelen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SEFRAKIDENT</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="SefrakIdentType">
+    <sequence>
+      <element name="kommune" type="gml:CodeType">
+        <annotation>
+          <documentation>nummerering av kommuner i henhold til Statistisk sentralbyrå sin offisielle liste</documentation>
+          <appinfo>
+             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMM</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="registreringskretsnummer" type="integer">
+        <annotation>
+          <documentation>Registreringskretsnummer er Riksantikvarens oppdeling av kommunen. Tilsvarer gamle kirkekretser. Må være større enn 0.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">REGISTRERINGSKRETSNUMMER</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="husløpenummer" type="integer">
+        <annotation>
+          <documentation>Løpenummer innen kretsnummer.
+Er entydig nøkkel for kulturminne sammen med kommune og kretsnummer.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HUSLØPENUMMER</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SefrakIdentPropertyType">
+    <sequence>
+      <element ref="app:SefrakIdent"/>
+    </sequence>
+  </complexType>
+  <simpleType name="SynbarhetType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:SynbarhetEnumerationType app:SynbarhetOtherType"/>
+  </simpleType>
+  <simpleType name="SynbarhetEnumerationType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>Fullt ut synlig/gjenfinnbar i terrenget (default-verdi)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>Forøvrig grei å innmåle. (Benyttes bl.a. for innmåling av ledninger på lukket grøft)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>Middels synlig i flybilde/modell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>Dårlig/ikke synlig i flybilde/modell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TakMur" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:TakMurType">
+    <annotation>
+      <documentation>opphøyde kanter ved takkant
+Merknad: Eksempel på kanter der TakMur skal benyttes er gavlvegger og brannvegger som stikker opp over takflaten</documentation>
+    </annotation>
+  </element>
+  <complexType name="TakMurType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TakMurPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:TakMur"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Takkant" substitutionGroup="app:Takriss" type="app:TakkantType">
+    <annotation>
+      <documentation>bygningens ytre takflateavgrensing
+Merknad: Høydereferansen er de målte punktene på taket.
+Merknad: Dersom deler av takkanten ikke er synlig kodes den synlige delen som takkant- og den ikke synlige som fiktiv bygningsavgrensning.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TakkantType">
+    <complexContent>
+      <extension base="app:TakrissType">
+        <sequence>
+          <element minOccurs="0" name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="treDNivå" type="app:TreDNivåType">
+            <annotation>
+              <documentation>hvilken 3D framstillingsmulighet (angitt i 6 nivåer) bygningen kan framstilles i.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">TRE_D_NIVÅ</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="takskjegg" type="integer">
+            <annotation>
+              <documentation>avstanden fra veggliv til takkant målt i cm</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">TAKSKJEGG</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TakkantPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Takkant"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Takoverbygg" substitutionGroup="app:DatafangstdatoOpsjonell" type="app:TakoverbyggType">
+    <annotation>
+      <documentation>byggverk med ingen eller få vegger, og som ikke er registrert som bygning i matrikkelen
+Eksempel:  'carport' eller tak over bensinpumper</documentation>
+    </annotation>
+  </element>
+  <complexType name="TakoverbyggType">
+    <complexContent>
+      <extension base="app:DatafangstdatoOpsjonellType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TakoverbyggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Takoverbygg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="TakoverbyggKant" substitutionGroup="app:KvalitetPåkrevd" type="app:TakoverbyggKantType">
+    <annotation>
+      <documentation>avgrensing av takoverbygg</documentation>
+    </annotation>
+  </element>
+  <complexType name="TakoverbyggKantType">
+    <complexContent>
+      <extension base="app:KvalitetPåkrevdType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TakoverbyggKantPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:TakoverbyggKant"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Takplatå" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:TakplatåType">
+    <annotation>
+      <documentation>innsøkk i form av laveste vannrette flate på hovedvolum på bygningskropp
+Eksempel: Arker som går inn i hovedtaket og "terrasse" inne i en bygård.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TakplatåType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TakplatåPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Takplatå"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="TakplatåTopp" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:TakplatåToppType">
+    <annotation>
+      <documentation>innsøkk i form av laveste vannrette flate på hovedvolum på bygningskropp
+Eksempel: Arker som går inn i hovedtaket og "terrasse" inne i en bygård.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TakplatåToppType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TakplatåToppPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:TakplatåTopp"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="Takriss" substitutionGroup="app:Bygningsavgrensning" type="app:TakrissType">
+    <annotation>
+      <documentation>bygningens avgrensning i form av takkant, fiktiv bygningsavgrensning og/eller bygningsdelelinje</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="TakrissType">
+    <complexContent>
+      <extension base="app:BygningsavgrensningType">
+        <sequence/>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TakrissPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Takriss"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Taksprang" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:TaksprangType">
+    <annotation>
+      <documentation>topp av takkant inne på en bygningskropp
+Merknad: ikke ytterkant som registreres som takkant</documentation>
+    </annotation>
+  </element>
+  <complexType name="TaksprangType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TaksprangPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Taksprang"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="TaksprangBunn" substitutionGroup="app:BeskrivendeBygningsdetalj" type="app:TaksprangBunnType">
+    <annotation>
+      <documentation>bunn av takkant inne på en bygningskropp
+Merknad: Ikke ytterkant som er takkant</documentation>
+    </annotation>
+  </element>
+  <complexType name="TaksprangBunnType">
+    <complexContent>
+      <extension base="app:BeskrivendeBygningsdetaljType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del (ytterkant)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Kurve</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TaksprangBunnPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:TaksprangBunn"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="TrappBygg" substitutionGroup="app:Bygningsvedheng" type="app:TrappByggType">
+    <annotation>
+      <documentation>omfatter trapper som danner adkomsten til hus og trapp inntil hus</documentation>
+    </annotation>
+  </element>
+  <complexType name="TrappByggType">
+    <complexContent>
+      <extension base="app:BygningsvedhengType">
+        <sequence/>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TrappByggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:TrappBygg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TreDNivåType">
+    <annotation>
+      <documentation>hvilken 3D framstillingsmulighet (angitt i 6 nivåer) bygningen kan framstilles i.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">TRE_D_NIVÅ</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:TreDNivåEnumerationType app:TreDNivåOtherType"/>
+  </simpleType>
+  <simpleType name="TreDNivåEnumerationType">
+    <annotation>
+      <documentation>hvilken 3D framstillingsmulighet (angitt i 6 nivåer) bygningen kan framstilles i.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">TRE_D_NIVÅ</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>Bygningers avgrensning på bakkeplan i 2D</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>Klosser med flate tak, hvor høyde på taket enten er minimum, maksimum eller gjennomsnitt av takhøyden rundt bygget. Dette er godt nok til enkel bruk, men blir ofte feil på bygårder og høyhus. Gjenkjennbarheten er ikke så stor.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>Hovedformen på tak er ivaretatt med bruk av mønelinjer, taksprang og knekklinjer. En god modell for de fleste analyser, men mangler detaljer på tak for enklere visuell gjenkjenning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>Takobjekter som bl.a. arker/kvister, altaner, sjakter og større piper er også med i modellen. Minstemål er innført. Jmf. den enkelte objekttype for detaljer. Dette gir noe riktigere grunnlag for analyser, og hever den visuelle kvaliteten.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="9">
+        <annotation>
+          <documentation>Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TreDNivåOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Veranda" substitutionGroup="app:Bygningsvedheng" type="app:VerandaType">
+    <annotation>
+      <documentation>bygningsvedheng som omfatter veranda,  terrasse, altan, balkong og lasterampe
+Merknad: Garasje med veranda på taket er enten en del av bygningsenheten den ligger til eller - hvis den er tildelt eget bygningsnummer - en bygning.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VerandaType">
+    <complexContent>
+      <extension base="app:BygningsvedhengType">
+        <sequence>
+          <element name="høydereferanse" type="app:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="medium" type="app:MediumType">
+            <annotation>
+              <documentation>objektets beliggenhet i forhold til jordoverflaten
+
+Eksempel:
+På bro, i tunnel, inne i et bygningsmessig anlegg, etc.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MEDIUM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VerandaPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Veranda"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

@@ -1,0 +1,1534 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Arealbruk/4.6" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="http://skjema.geonorge.no/SOSI/produktspesifikasjon/FKB-Arealbruk/4.6" version="4.6">
+  <annotation>
+    <documentation>Spesifikasjonen beskriver arealbruk uavhengig av markens produksjonsevne. Arealbruk beskriver den fysiske bruk av et geografisk område. Eksempler på dette er parkering på et jorde som vil kodes som en parkeringsplass, uavhengig av om dette arealstykke egner seg som fulldyrka. Arealbruken må holdes atskilt fra markslagsbeskrivelsene som beskriver jordas bærevne (arealtilstand, bonitet, markslag og mineralske råstoffer). En del objekter befinner seg derimot i et grenseland, og det kan være vanskelig å avgjøre i hvilke kapittel de ulike objektene hører hjemme. 
+
+FKB-Arealbruk baserer seg på generelle konsepter definert i SOSI del 1 4.5 og SOSI del 2 Areal versjon 4.0</documentation>
+  </annotation>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Alpinbakke" substitutionGroup="app:Fellesegenskaper" type="app:AlpinbakkeType">
+    <annotation>
+      <documentation>nedfart for ski med permanent karakter</documentation>
+    </annotation>
+  </element>
+  <complexType name="AlpinbakkeType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="AlpinbakkePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Alpinbakke"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Anleggsområde" substitutionGroup="app:Fellesegenskaper" type="app:AnleggsområdeType">
+    <annotation>
+      <documentation>område der det pågår anleggsarbeid</documentation>
+    </annotation>
+  </element>
+  <complexType name="AnleggsområdeType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="AnleggsområdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Anleggsområde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Arealbrukgrense" substitutionGroup="app:KvalitetPåkrevd" type="app:ArealbrukgrenseType">
+    <annotation>
+      <documentation>avgrensning av de ulike arealbruksflatene  
+
+Merknad:
+Kode for bruken av arealet legges på flaten, dvs på representasjonspunktet der dette representerer flata.</documentation>
+    </annotation>
+  </element>
+  <complexType name="ArealbrukgrenseType">
+    <complexContent>
+      <extension base="app:KvalitetPåkrevdType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ArealbrukgrensePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Arealbrukgrense"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="ArealbrukgrenseFiktiv" substitutionGroup="app:KvalitetOpsjonell" type="app:ArealbrukgrenseFiktivType">
+    <annotation>
+      <documentation>fiktiv avgrensning av de ulike arealbruksflatene.</documentation>
+    </annotation>
+  </element>
+  <complexType name="ArealbrukgrenseFiktivType">
+    <complexContent>
+      <extension base="app:KvalitetOpsjonellType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger objektets sentrale del</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ArealbrukgrenseFiktivPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:ArealbrukgrenseFiktiv"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Campingplass" substitutionGroup="app:Fellesegenskaper" type="app:CampingplassType">
+    <annotation>
+      <documentation>faste anlegg med vaskerom, campinghytter o.l.</documentation>
+    </annotation>
+  </element>
+  <complexType name="CampingplassType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="CampingplassPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Campingplass"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="app:FellesegenskaperType">
+    <annotation>
+      <documentation>abstrakt objekt som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="FellesegenskaperType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="identifikasjon" type="app:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>Unik identifikasjon av objektet</documentation>
+            </annotation>
+          </element>
+          <element name="datafangstdato" type="date">
+            <annotation>
+              <documentation>dato når objektet siste gang ble registrert/observert/målt i terrenget
+
+Merknad: I mange tilfeller er denne forskjellig fra Oppdateringsdato, da registrerte endringer kan bufres i en kortere eller lengre periode før disse legges inn i databasen.
+Ved førstegangsregistrering settes Datafangstdato lik førsteDatafangstdato.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">DATAFANGSTDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="registreringsversjon" type="app:RegistreringsversjonPropertyType">
+            <annotation>
+              <documentation>angivelse av hvilken produktspesifikasjon som er utgangspunkt for dataene</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="verifiseringsdato" type="date">
+            <annotation>
+              <documentation>dato når dataene er fastslått å være i samsvar med virkeligheten
+
+Merknad: Verifiseringsdato er identisk med ..DATO i tidligere versjoner av SOSI</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERIFISERINGSDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+            <annotation>
+              <documentation>dato for siste endring på objektetdataene 
+
+Merknad: 
+Oppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).
+
+-Definition-
+Date and time at which this version of the spatial object was inserted or changed in the spatial data set.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">OPPDATERINGSDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="informasjon" type="string">
+            <annotation>
+              <documentation>generell opplysning
+
+Merknad:
+mulighet til å legge inn utfyllende informasjon om objektet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">INFORMASJON</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosesshistorie" type="string">
+            <annotation>
+              <documentation>beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene
+
+Merknad:
+Prosesshistorie vil kunne inneholde informasjon om transformasjoner. Hva slags informasjon som angis er ofte gitt i andre standarder, f.eks kvalitet og kvalitetsikring.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PROSESS_HISTORIE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kopidata" type="app:KopidataPropertyType">
+            <annotation>
+              <documentation>angivelse av at objektet er hentet fra et kopidatasett og ikke fra originaldatasettet
+
+Merknad: Inneholder informasjon om når kopidatasettet ble kopiert fra originaldatasettet og hvem som er originaldataansvarlig</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FellesegenskaperPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Fellesegenskaper"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Fyllplass" substitutionGroup="app:Fellesegenskaper" type="app:FyllplassType">
+    <annotation>
+      <documentation>plass for deponering av masse</documentation>
+    </annotation>
+  </element>
+  <complexType name="FyllplassType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FyllplassPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Fyllplass"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Golfbane" substitutionGroup="app:Fellesegenskaper" type="app:GolfbaneType">
+    <annotation>
+      <documentation>område for golfspilling</documentation>
+    </annotation>
+  </element>
+  <complexType name="GolfbaneType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GolfbanePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Golfbane"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Gravplass" substitutionGroup="app:Fellesegenskaper" type="app:GravplassType">
+    <annotation>
+      <documentation>område for gravstøtter, begravelsesplass og kirkegård</documentation>
+    </annotation>
+  </element>
+  <complexType name="GravplassType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">Flate</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GravplassPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Gravplass"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Grustak" substitutionGroup="app:Fellesegenskaper" type="app:GrustakType">
+    <annotation>
+      <documentation>uttaksplass, område, drevet i dagen for malm eller sand, grus, pukk, skifer</documentation>
+    </annotation>
+  </element>
+  <complexType name="GrustakType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GrustakPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Grustak"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Gruve" substitutionGroup="app:Fellesegenskaper" type="app:GruveType">
+    <annotation>
+      <documentation>ikke dagbrudd og skjerp, hvor gruveinngangen er tydelig</documentation>
+    </annotation>
+  </element>
+  <complexType name="GruveType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GruvePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Gruve"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="app:IdentifikasjonType">
+    <annotation>
+      <documentation>Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">IDENT</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string">
+        <annotation>
+          <documentation>lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LOKALID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="navnerom" type="string">
+        <annotation>
+          <documentation>navnerom som unikt identifiserer datakilden til objektet,</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NAVNEROM</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="versjonId" type="string">
+        <annotation>
+          <documentation>identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERSJONID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="app:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <element name="Industriområde" substitutionGroup="app:Fellesegenskaper" type="app:IndustriområdeType">
+    <annotation>
+      <documentation>område, bebygd eller ubebygd, benyttet til industriformål</documentation>
+    </annotation>
+  </element>
+  <complexType name="IndustriområdeType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="IndustriområdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Industriområde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="KantUtsnitt" substitutionGroup="gml:AbstractFeature" type="app:KantUtsnittType">
+    <annotation>
+      <documentation>avgrensning av et utsnitt. 
+
+Bruk av KantUtsnitt i FKB:
+KantUtsnitt lagres ikke i forvaltningsbasen men kan benyttes for å lage komplette flateavgrensninger ved klipping av et område ut fra forvaltningsbasen. KantUtsnitt kan derfor finnes i fileksporter.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KantUtsnittType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>forløp som følger overgang mellom ulike fenomener</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="identifikasjon" type="app:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>Unik identifikasjon av objektet</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KantUtsnittPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:KantUtsnitt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Kopidata" substitutionGroup="gml:AbstractObject" type="app:KopidataType">
+    <annotation>
+      <documentation>angivelse av at objektet er hentet fra en kopi av originaldata
+
+Merknad: 
+Kan benyttes dersom man gjør et uttak av en database som ikke inneholder originaldataene.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOPIDATA</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="KopidataType">
+    <sequence>
+      <element name="områdeId" type="integer">
+        <annotation>
+          <documentation>identifikasjon av område som dataene dekker
+
+Merknad: Kan angis med kommunenummer eller fylkesnummer. Disse bør spesifiseres nærmere.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">OMRÅDEID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="originalDatavert" type="string">
+        <annotation>
+          <documentation>ansvarlig etat for forvaltning av data</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ORIGINALDATAVERT</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="kopidato" type="dateTime">
+        <annotation>
+          <documentation>dato når objektet ble kopiert fra originaldatasettet  
+
+Merknad:
+Er en del av egenskapen Kopidata. Brukes i de tilfeller hvor en kopidatabase brukes til distribusjon.
+Å kopiere et datasett til en kopidatabase skal ikke føre til at Oppdateringsdato blir endret.
+Eventuell redigering av data i et kopidatasett medfører ny Oppdateringsdato, Datafangstdato og/eller Verifiseringsdato.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOPIDATO</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="KopidataPropertyType">
+    <sequence>
+      <element ref="app:Kopidata"/>
+    </sequence>
+  </complexType>
+  <element abstract="true" name="KvalitetOpsjonell" substitutionGroup="app:Fellesegenskaper" type="app:KvalitetOpsjonellType">
+    <annotation>
+      <documentation>abstrakt objekt som bærer en felles egenskaper som brukes på fiktive linjer i FKB</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="KvalitetOpsjonellType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element minOccurs="0" name="kvalitet" type="app:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KvalitetOpsjonellPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:KvalitetOpsjonell"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="KvalitetPåkrevd" substitutionGroup="app:Fellesegenskaper" type="app:KvalitetPåkrevdType">
+    <annotation>
+      <documentation>Posisjonskvalitet er påkrevd. Brukes stort sett på på kurve- og punktobjekter i FKB.</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="KvalitetPåkrevdType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="kvalitet" type="app:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen
+
+Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KvalitetPåkrevdPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:KvalitetPåkrevd"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Leirtak" substitutionGroup="app:Fellesegenskaper" type="app:LeirtakType">
+    <annotation>
+      <documentation>område for leirtak</documentation>
+    </annotation>
+  </element>
+  <complexType name="LeirtakType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LeirtakPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Leirtak"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Lekeplass" substitutionGroup="app:Fellesegenskaper" type="app:LekeplassType">
+    <annotation>
+      <documentation>område for lekeplass</documentation>
+    </annotation>
+  </element>
+  <complexType name="LekeplassType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LekeplassPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Lekeplass"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MålemetodeType">
+    <annotation>
+      <documentation>metode som ligger til grunn for registrering av posisjon</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MålemetodeEnumerationType app:MålemetodeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeEnumerationType">
+    <annotation>
+      <documentation>metode som ligger til grunn for registrering av posisjon</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Målt i terrenget , uspesifisert metode/måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="11">
+        <annotation>
+          <documentation>Målt i terrenget med totalstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>Målt i terrenget med teodolitt og elektronisk avstandsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="13">
+        <annotation>
+          <documentation>Målt i terrenget med teodolitt og målebånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14">
+        <annotation>
+          <documentation>Målt i terrenget, ortogonalmetoden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15">
+        <annotation>
+          <documentation>Punkt beregnet på bakgrunn av måling mot andre punkter, slik som to avstander eller avstand og retning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="18">
+        <annotation>
+          <documentation>Tatt fra plan eller godkjent tiltak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>Annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>Målt i stereoinstrument, uspesifisert instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="21">
+        <annotation>
+          <documentation>Punkt beregnet ved aerotriangulering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>Målt i stereoinstrument, analytisk plotter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="23">
+        <annotation>
+          <documentation>Målt i stereoinstrument, autograf, analogt instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>Målt i stereoinstrument, digitalt instrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="30">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner, uspesifisert kartmedium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="31">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er blyantoriginal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="32">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er rissefolie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="33">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av  god kvalitet.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="34">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er transparent folie av mindre god kvalitet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="35">
+        <annotation>
+          <documentation>Geometri overført fra kart maskinelt ved hjelp av skanner. Kartmedium er papirkopi.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>Målt med laserskanner fra fly</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="37">
+        <annotation>
+          <documentation>Målt med laserskanner plassert i kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="38">
+        <annotation>
+          <documentation>brukes for objekter som er stedfestet med lineær referanse, enten disse leveres med stedfesting kun som lineære referanser, eller med koordinatgeometri avledet fra lineære referanser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="39">
+        <annotation>
+          <documentation>Målt med laserskanner fra instrument på bakken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="40">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto eller flybilde ved hjelp av manuell registrering på et digitaliseringsbord, uspesifisert bildemedium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="41">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="42">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="43">
+        <annotation>
+          <documentation>Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er film</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="44">
+        <annotation>
+          <documentation>Geometri overført fra flybilde ved hjelp av manuell registrering på et digitaliseringsbord. Bildemedium er fotokopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="45">
+        <annotation>
+          <documentation>Geometri overført fra ortofoto ved hjelp av manuell registrering på skjerm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="46">
+        <annotation>
+          <documentation>Geometri overført fra satellittbilde ved hjelp av manuell registrering på skjerm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="47">
+        <annotation>
+          <documentation>Digitalisert på skjerm fra andre digitale rasterdata</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="48">
+        <annotation>
+          <documentation>Digitalisert på skjerm fra tolkning av seismikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="49">
+        <annotation>
+          <documentation>Vektorisering fra laserdata, brukes også der vektoriseringen støttes av ortofoto</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="50">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord, medium uspesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="51">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er blyantoriginal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="52">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er rissefolie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="53">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av god kvalitet, samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="54">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er transparent folie av mindre god kvalitet, samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="55">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på et digitaliseringsbord. Kartmedium er papirkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="56">
+        <annotation>
+          <documentation>Geometri overført fra kart ved hjelp av manuell registrering på skjerm, medium skannet kart (raster), samkopi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode. Ikke nærmere spesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="61">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode, fra terrengmodell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="62">
+        <annotation>
+          <documentation>Genererte data, interpolasjonsmetode, vektet middel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>Genererte data: Sirkelgeometri, korridor eller annen geometri generert ut fra f.eks et punkt eller en linje (f.eks midtlinje veg)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="64">
+        <annotation>
+          <documentation>Genererte data: Generalisering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="65">
+        <annotation>
+          <documentation>Genererte data: Sentralpunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="66">
+        <annotation>
+          <documentation>Genererte data: Sammenknytningspunkt (f.eks mellom ulike kartlegginger), randpunkt (f.eks mellom ulike kilder til kart)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="67">
+        <annotation>
+          <documentation>Koordinater hentet fra GAB/Matrikkelen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="68">
+        <annotation>
+          <documentation>Koordinater hentet fra JREG, jordregisteret</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="69">
+        <annotation>
+          <documentation>Beregnet, uspesifisert hvordan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>Spesielle metoder, uspesifisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="71">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stikkstang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="72">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med waterstang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="73">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med målehjul</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="74">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stigningsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="75">
+        <annotation>
+          <documentation>Data generert ved bildematching</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="77">
+        <annotation>
+          <documentation>Punkt fastsatt ut fra et grunnlag (kart, bilde), f.eks ved partenes enighet ved en oppmålingsforretning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="78">
+        <annotation>
+          <documentation>Geometri fastsatt ved dom, lov, traktat eller kongelig resolusjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="79">
+        <annotation>
+          <documentation>Annet (spesifiseres i filhode)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="80">
+        <annotation>
+          <documentation>Digitalisert ut fra frihåndstegning.  Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="81">
+        <annotation>
+          <documentation>Digitalisert fra krokering på kart, dvs grovt skissert på kart</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="82">
+        <annotation>
+          <documentation>Digitalisert ut fra frihåndstegning (direkte på skjerm). Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>Treghetsstedfesting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="91">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, relative målinger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="92">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Kodemåling, enkle målinger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="93">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling statisk måling.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="94">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO): Fasemåling andre metoder.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="95">
+        <annotation>
+          <documentation>Kombinasjon av GPS/Treghet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO).: Fasemåling RTK (realtids kinematisk måling)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="97">
+        <annotation>
+          <documentation>Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO). Fasemåling float-løsning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="99">
+        <annotation>
+          <documentation>Målemetode er ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:MålemetodeHøydeEnumerationType app:MålemetodeHøydeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeEnumerationType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Terrengmålt: Uspesifisert måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="11">
+        <annotation>
+          <documentation>Terrengmålt: Totalstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>Terrengmålt: Teodolitt og el avstandsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="13">
+        <annotation>
+          <documentation>Terrengmålt: Teodolitt og målebånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14">
+        <annotation>
+          <documentation>Terrengmålt: Ortogonalmetoden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15">
+        <annotation>
+          <documentation>Nivellement</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="18">
+        <annotation>
+          <documentation>Tatt fra plan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>Annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>Stereoinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="21">
+        <annotation>
+          <documentation>Aerotriangulert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>Stereoinstrument: Analytisk plotter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="23">
+        <annotation>
+          <documentation>Stereoinstrument: Autograf</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>Stereoinstrument: Digitalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>Flybåren laserscanning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>Genererte data (interpolasjon)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="61">
+        <annotation>
+          <documentation>Genererte data (interpolasjon): Terrengmodell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="62">
+        <annotation>
+          <documentation>Genererte data (interpolasjon): Vektet middel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>Genererte data: Fra annen geometri</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="64">
+        <annotation>
+          <documentation>Genererte data: Generalisering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="66">
+        <annotation>
+          <documentation>Genererte data: Sammenknytningspunkt, randpunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="67">
+        <annotation>
+          <documentation>Koordinater hentet fra GAB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="68">
+        <annotation>
+          <documentation>Koordinater hentet fra JREG</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="69">
+        <annotation>
+          <documentation>Beregnet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>Spesielle metoder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="74">
+        <annotation>
+          <documentation>Spesielle metoder: Målt med stigningsmåler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="78">
+        <annotation>
+          <documentation>Fastsatt ved dom eller kongelig resolusjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="79">
+        <annotation>
+          <documentation>Annet (spesifiseres i filhode)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>Treghetsstedfesting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="91">
+        <annotation>
+          <documentation>GNSS: Kodemåling, relative målinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="92">
+        <annotation>
+          <documentation>GNSS: Kodemåling, enkle målinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="93">
+        <annotation>
+          <documentation>GNSS: Fasemåling, statisk måling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="94">
+        <annotation>
+          <documentation>GNSS: Fasemåling, andre metoder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="95">
+        <annotation>
+          <documentation>Kombinasjon av GNSS/Treghet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>GNSS: Fasemåling RTK</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="99">
+        <annotation>
+          <documentation>Ukjent målemetode</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Park" substitutionGroup="app:Fellesegenskaper" type="app:ParkType">
+    <annotation>
+      <documentation>grøntområde i by- eller tettbygd område, opparbeidet og vedlikeholdt med plenareal, beplantninger, vannpartier og lignende</documentation>
+    </annotation>
+  </element>
+  <complexType name="ParkType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ParkPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Park"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="app:PosisjonskvalitetType">
+    <annotation>
+      <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KVALITET</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="PosisjonskvalitetType">
+    <sequence>
+      <element name="målemetode" type="app:MålemetodeType">
+        <annotation>
+          <documentation>metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss</documentation>
+        </annotation>
+      </element>
+      <element name="nøyaktighet" type="integer">
+        <annotation>
+          <documentation>punktstandardavviket i grunnriss for punkter samt tverravvik for linjer
+
+Merknad:
+Oppgitt i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="synbarhet" type="app:SynbarhetType">
+        <annotation>
+          <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="målemetodeHøyde" type="app:MålemetodeHøydeType">
+        <annotation>
+          <documentation>metode for å måle høyden</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighetHøyde" type="integer">
+        <annotation>
+          <documentation>nøyaktigheten til høyden i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetPropertyType">
+    <sequence>
+      <element ref="app:Posisjonskvalitet"/>
+    </sequence>
+  </complexType>
+  <element name="Registreringsversjon" substitutionGroup="gml:AbstractObject" type="app:RegistreringsversjonType">
+    <annotation>
+      <documentation>angir hvilken versjon av registreringsinstruksen som ble benyttet ved datafangst
+
+Eksempel:
+I et datasett kan det finnes objekter som er etablert fra ulike registreringsversjoner. For eksempel har registreringsinstruksen for objekttypen Takkant i FKB blitt endret fra SOSI/FKB-versjon 3.4 til versjon 4.0. Dersom en kommune ønsker å ajourføre Takkant for et delområde av kommunen etter FKB/SOSI-versjon 4.0, vil han etter ajourføring ha et kommunedekkende datasett der Takkant er registrert med forskjellig registreringsinstruks. I disse tilfellene kan det være nyttig å kunne skille på objektnivå hvilken registreringsversjon som er benyttet ved datafangst. Egenskapen kan benyttes til dette.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">REGISTRERINGSVERSJON</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="RegistreringsversjonType">
+    <sequence>
+      <element name="produkt" type="string">
+        <annotation>
+          <documentation>entydig navn på produktet i form av et kortnavn</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PRODUKT</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="versjon" type="string">
+        <annotation>
+          <documentation>versjonsnummer</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERSJON</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="undertype" type="string">
+        <annotation>
+          <documentation>brukes for å skille mellom undertyper av en versjon, dvs. endringer i registeringsinstruks for et objekt</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">UNDERVERSJON</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="RegistreringsversjonPropertyType">
+    <sequence>
+      <element ref="app:Registreringsversjon"/>
+    </sequence>
+  </complexType>
+  <element name="Skytebane" substitutionGroup="app:Fellesegenskaper" type="app:SkytebaneType">
+    <annotation>
+      <documentation>avgrenset område hvor det skytes</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkytebaneType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>Området for selve skytebanen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkytebanePropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Skytebane"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="SportIdrettPlass" substitutionGroup="app:Fellesegenskaper" type="app:SportIdrettPlassType">
+    <annotation>
+      <documentation>område hvor det utøves sport og idrett</documentation>
+    </annotation>
+  </element>
+  <complexType name="SportIdrettPlassType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SportIdrettPlassPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:SportIdrettPlass"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Steinbrudd" substitutionGroup="app:Fellesegenskaper" type="app:SteinbruddType">
+    <annotation>
+      <documentation>område for steinbrudd</documentation>
+    </annotation>
+  </element>
+  <complexType name="SteinbruddType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SteinbruddPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Steinbrudd"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Steintipp" substitutionGroup="app:Fellesegenskaper" type="app:SteintippType">
+    <annotation>
+      <documentation>område for steintipp</documentation>
+    </annotation>
+  </element>
+  <complexType name="SteintippType">
+    <complexContent>
+      <extension base="app:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>sted som objektet eksisterer på</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SteintippPropertyType">
+    <sequence minOccurs="0">
+      <element ref="app:Steintipp"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="SynbarhetType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="app:SynbarhetEnumerationType app:SynbarhetOtherType"/>
+  </simpleType>
+  <simpleType name="SynbarhetEnumerationType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>Fullt ut synlig (default-verdi)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>Forøvrig grei å innmåle. (Benyttes bl.a. for innmåling av ledninger på lukket grøft)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>Middels synlig i flybilde/modell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>Dårlig/ikke synlig i flybilde/modell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>
